@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class ResearchManager : MonoBehaviour
 {
+    private float nextResearchCompleteTime;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -15,4 +17,10 @@ public class ResearchManager : MonoBehaviour
     {
         
     }
+
+    public void StartNewResearch()
+    {
+        
+    }
+
 }
