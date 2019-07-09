@@ -1,0 +1,13 @@
+[Ll]ibrary/
+[Tt]emp/
+[Oo]bj/
+[Bb]uild/
+[Bb]uilds/
+Assembly-CSharp.csproj
+Assets/AssetStoreTools*
+ancient-armory.sln
+
+Assets/Art/Vendor/*
+
+!*.meta
+!*.md
