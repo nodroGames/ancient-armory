@@ -15,6 +15,9 @@ public class ResearchManager : MonoBehaviour
     [SerializeField]
     private GameObject researchPrompt;
 
+    [SerializeField]
+    private GameObject researchIcon;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -32,13 +35,32 @@ public class ResearchManager : MonoBehaviour
         switch (researchFacilityState)
         {
             case ResearchFacilityState.WaitingForNextResearch:
-                UpdateVisuals();
+                if(Time.time > nextResearchPromptTime)
+                {
+                    researchFacilityState = ResearchFacilityState.ShowResearchIcon;//move on to next state
+                }
+                else
+                {
+                    UpdateVisuals();
+                }
                 break;
+
+            case ResearchFacilityState.ShowResearchIcon:
+                researchIcon.SetActive(true);
+                researchFacilityState = ResearchFacilityState.WaitForPlayer;
+                break;
+
             case ResearchFacilityState.StartPrompt:
+                //draw random reserach
+                //give data to researchPrompt
                 researchPrompt.SetActive(true);
+                researchFacilityState = ResearchFacilityState.WaitForPlayer;
                 break;
+
             case ResearchFacilityState.WaitForPlayer:
+                //do nothing while waiting for the Player to make up their mind.
                 break;
+
             case ResearchFacilityState.Researching:
                 UpdateVisuals();
                 break;
@@ -88,6 +110,11 @@ public class ResearchManager : MonoBehaviour
         
     }
 
-
+    public void OnResearchIconPressed()
+    {
+        researchIcon.SetActive(false);
+        researchFacilityState = ResearchFacilityState.StartPrompt;
+        //space for coroutines
+    }
 
 }
