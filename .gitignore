@@ -38,6 +38,7 @@ sysinfo.txt
 .vs/
 
 Assets/Art/Vendor/*
+Assets/3rdParty/Vendor/
 
 !*.meta
 !*.md
