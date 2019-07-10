@@ -14,13 +14,7 @@ public class TimerController : MonoBehaviour
 
     [SerializeField]
     private bool restartAfterTimerFinish = false;
-
-    /// <summary>
-    /// 
-    /// </summary>
-    [SerializeField]
-    private float countdownAmount = 5;
-
+    
     [Header("---UI Elements---")]
     [SerializeField]
     private int updatesPerSecond = 2;
@@ -45,6 +39,8 @@ public class TimerController : MonoBehaviour
 
     //coroutine stuff
     private Coroutine coroutine_updateVisuals;
+
+    private float cachedTimerDuration;
 
     // Start is called before the first frame update
     void Start()
@@ -116,7 +112,7 @@ public class TimerController : MonoBehaviour
             var timeRemaining = timerEndTime - Time.time;
 
             if(timerText) timerText.text = ParseTimeToString(timeRemaining);//update text
-            if(timerSlider) timerSlider.value = Time.time / timerEndTime;//update slider
+            if(timerSlider) timerSlider.value = 1 - (timeRemaining / cachedTimerDuration);//update slider  
 
             yield return new WaitForSeconds(1 / updatesPerSecond);//limit amount of polling
             yield return new WaitForFixedUpdate();//keep all timers in sync
@@ -141,11 +137,12 @@ public class TimerController : MonoBehaviour
         //restart or disable?
         if (restartAfterTimerFinish)
         {
-            StartTimer(countdownAmount);
+            StartTimer(cachedTimerDuration);
         }
         else
         {
             this.gameObject.SetActive(false);
+            onTimerComplete.RemoveAllListeners();
         }
     }
 
@@ -156,17 +153,13 @@ public class TimerController : MonoBehaviour
     /// <param name="timerMode"></param>
     public void StartTimer(float givenTime, string timerName = "", TimerMode timerMode = TimerMode.Countdown, bool restartAfterEnd = false)
     {
-        countdownAmount = givenTime;//cache time in case restarts
-        restartAfterTimerFinish = restartAfterEnd;
+        cachedTimerDuration = givenTime;//cache time in case restarts
+        restartAfterTimerFinish = restartAfterEnd;//cache
 
-        if (!this.gameObject.activeSelf)
+        if (!this.gameObject.activeSelf)//set active if not already
         {
             this.gameObject.SetActive(true);
         }
-
-        coroutine_updateVisuals = StartCoroutine(UpdateVisuals());
-
-        if(timerTitleText) timerTitleText.text = timerName;
 
         switch (timerMode)
         {
@@ -177,6 +170,10 @@ public class TimerController : MonoBehaviour
                 timerEndTime = givenTime;
                 break;
         }
+
+        //handle visuals
+        if (timerTitleText) timerTitleText.text = timerName;
+        coroutine_updateVisuals = StartCoroutine(UpdateVisuals());
     }
 
     public void StopTimer()
