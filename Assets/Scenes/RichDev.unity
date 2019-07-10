@@ -451,6 +451,11 @@ PrefabInstance:
       propertyPath: initialTimeDelay
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 262592437551544682, guid: 2d83330801e13684eae426db7c5213bf,
+        type: 3}
+      propertyPath: timeToGetNewResearch
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 262592436569810044, guid: 2d83330801e13684eae426db7c5213bf,
         type: 3}
       propertyPath: m_IsActive
