@@ -16,7 +16,10 @@ public class NewResearchPromptController : MonoBehaviour
     private Image backgroundImage;
 
     //events
+    [HideInInspector]
     public UnityEvent acceptResearch;
+
+    [HideInInspector]
     public UnityEvent rejectResearch;
 
     private void Start()

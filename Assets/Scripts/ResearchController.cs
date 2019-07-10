@@ -43,6 +43,7 @@ public class ResearchController : MonoBehaviour
         researchPrompt.SetActive(false);
 
         timerController.onTimerComplete.AddListener(OnNextResearchTime);
+        timerController.StartTimer(15, "Gathering new research...");
     }
 
     private void OnNextResearchTime()

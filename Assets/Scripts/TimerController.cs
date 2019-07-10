@@ -35,6 +35,7 @@ public class TimerController : MonoBehaviour
     private Slider timerSlider;
 
     //event stuff
+    [HideInInspector]
     public UnityEvent onTimerComplete;
 
     /// <summary>
@@ -49,6 +50,10 @@ public class TimerController : MonoBehaviour
     void Start()
     {
         //StartTimer(countdownAmount);
+        if (onTimerComplete == null)
+        {
+            onTimerComplete = new UnityEvent();
+        }
     }
 
     // Update is called once per frame
