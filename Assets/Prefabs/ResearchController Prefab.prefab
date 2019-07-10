@@ -102,8 +102,8 @@ GameObject:
   - component: {fileID: 262592437551544683}
   - component: {fileID: 262592437551544682}
   m_Layer: 0
-  m_Name: Research Prefab
-  m_TagString: Untagged
+  m_Name: ResearchController Prefab
+  m_TagString: ResearchController
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
