@@ -138,9 +138,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   researchFacilityState: 0
   tier1Research: []
+  timerController: {fileID: 7100336189582619224}
+  newResearchPromptController: {fileID: 7693933944616317669}
   researchPrompt: {fileID: 26103051882076520}
   researchIcon: {fileID: 3719618502271575132}
-  timerController: {fileID: 7100336189582619224}
 --- !u!1 &262592438294325394
 GameObject:
   m_ObjectHideFlags: 0
@@ -769,6 +770,26 @@ PrefabInstance:
       propertyPath: m_LocalScale.y
       value: 0.025
       objectReference: {fileID: 0}
+    - target: {fileID: 5972385020816170366, guid: 6c4971a60ad724f44ab8fdf1dff2ba70,
+        type: 3}
+      propertyPath: onTimerComplete.m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5972385020816170366, guid: 6c4971a60ad724f44ab8fdf1dff2ba70,
+        type: 3}
+      propertyPath: onTimerComplete.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5972385020816170366, guid: 6c4971a60ad724f44ab8fdf1dff2ba70,
+        type: 3}
+      propertyPath: onTimerComplete.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5972385020816170366, guid: 6c4971a60ad724f44ab8fdf1dff2ba70,
+        type: 3}
+      propertyPath: onTimerComplete.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 262592437551544685}
     - target: {fileID: 7428807922772719896, guid: 6c4971a60ad724f44ab8fdf1dff2ba70,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -1020,3 +1041,15 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 8980608285795279675}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &7693933944616317669 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1614504797177450974, guid: f086f915f5b75a7458da682f936927bd,
+    type: 3}
+  m_PrefabInstance: {fileID: 8980608285795279675}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 26103051882076520}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9c306d65a2112b4fac8c378b9cbca0f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
