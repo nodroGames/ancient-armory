@@ -143,8 +143,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 09512f6f5bc9bb546be836154be3e04f, type: 2}
   timerController: {fileID: 7100336189582619224}
   newResearchPromptController: {fileID: 7693933944616317669}
-  researchPrompt: {fileID: 26103051882076520}
   researchIcon: {fileID: 3719618502271575132}
+  timeToGetNewResearch: 5
 --- !u!1 &262592438294325394
 GameObject:
   m_ObjectHideFlags: 0
@@ -310,7 +310,7 @@ RectTransform:
   m_GameObject: {fileID: 567348030252097781}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.0175, y: 0.0175, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3663714371843713967}
   m_RootOrder: 1
@@ -318,7 +318,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 200, y: 200}
+  m_SizeDelta: {x: 3.5, y: 3.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3360722288924660788
 CanvasRenderer:
@@ -335,20 +335,20 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 567348030252097781}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0.81136143, b: 0.3160377, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -580,7 +580,6 @@ GameObject:
   m_Component:
   - component: {fileID: 3663714371843713967}
   - component: {fileID: 1877641881933087374}
-  - component: {fileID: 2245354036909041728}
   m_Layer: 0
   m_Name: Research Icon
   m_TagString: Untagged
@@ -617,35 +616,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3719618502271575132}
   m_CullTransparentMesh: 0
---- !u!114 &2245354036909041728
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3719618502271575132}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0.81136143, b: 0.3160377, a: 1}
-  m_RaycastTarget: 0
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
-      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
 --- !u!1001 &3488982038196825894
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1032,27 +1002,21 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f086f915f5b75a7458da682f936927bd, type: 3}
---- !u!1 &26103051882076520 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 9006419914860132947, guid: f086f915f5b75a7458da682f936927bd,
-    type: 3}
-  m_PrefabInstance: {fileID: 8980608285795279675}
-  m_PrefabAsset: {fileID: 0}
---- !u!224 &26103051882076523 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 9006419914860132944, guid: f086f915f5b75a7458da682f936927bd,
-    type: 3}
-  m_PrefabInstance: {fileID: 8980608285795279675}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &7693933944616317669 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1614504797177450974, guid: f086f915f5b75a7458da682f936927bd,
     type: 3}
   m_PrefabInstance: {fileID: 8980608285795279675}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 26103051882076520}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a9c306d65a2112b4fac8c378b9cbca0f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!224 &26103051882076523 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 9006419914860132944, guid: f086f915f5b75a7458da682f936927bd,
+    type: 3}
+  m_PrefabInstance: {fileID: 8980608285795279675}
+  m_PrefabAsset: {fileID: 0}
