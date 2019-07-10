@@ -38,7 +38,8 @@ sysinfo.txt
 .vs/
 
 Assets/Art/Vendor/*
-Assets/3rdParty/Vendor/
+Assets/3rdParty/Vendor/*
+.DS_Store
 
 !*.meta
 !*.md
