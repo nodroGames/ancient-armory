@@ -14,6 +14,6 @@ public class Research : ScriptableObject
 
     public virtual void OnResearchComplete()
     {
-        Debug.Log(this.name + " Research Complete!");
+        Debug.Log(this.name + " Research Complete!", this);
     }
 }
