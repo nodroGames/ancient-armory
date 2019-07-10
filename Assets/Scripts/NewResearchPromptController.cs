@@ -55,4 +55,9 @@ public class NewResearchPromptController : MonoBehaviour
     {
         rejectResearch.Invoke();
     }
+
+    public void ToggleVisuals(bool active)
+    {
+        this.gameObject.SetActive(active);
+    }
 }

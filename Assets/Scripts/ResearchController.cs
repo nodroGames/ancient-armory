@@ -15,10 +15,7 @@ public class ResearchController : MonoBehaviour
     [SerializeField]
     private NewResearchPromptController newResearchPromptController;
 
-    [Header("---Windows---")]
-    [SerializeField]
-    private GameObject researchPrompt;
-
+    [Header("---UI---")]
     [SerializeField]
     private GameObject researchIcon;
     
@@ -40,7 +37,7 @@ public class ResearchController : MonoBehaviour
         researchFacilityState = ResearchFacilityState.WaitingForNextResearch;
 
         researchIcon.SetActive(false);
-        researchPrompt.SetActive(false);
+        newResearchPromptController.ToggleVisuals(false);
 
         timerController.onTimerComplete.AddListener(OnNextResearchTime);
         timerController.StartTimer(15, "Gathering new research...");
@@ -60,7 +57,7 @@ public class ResearchController : MonoBehaviour
 
     private void ShowResearchPrompt()
     {
-        researchPrompt.SetActive(true);
+        newResearchPromptController.ToggleVisuals(true);
         researchFacilityState = ResearchFacilityState.WaitForPlayer;
     }
 
