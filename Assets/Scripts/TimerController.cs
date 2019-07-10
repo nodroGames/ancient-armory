@@ -110,8 +110,8 @@ public class TimerController : MonoBehaviour
         {
             var timeRemaining = timerEndTime - Time.time;
 
-            timerText.text = ParseTimeToString(timeRemaining);//update text
-            timerSlider.value = Time.time / timerEndTime;//update slider
+            if(timerText) timerText.text = ParseTimeToString(timeRemaining);//update text
+            if(timerSlider) timerSlider.value = Time.time / timerEndTime;//update slider
 
             yield return new WaitForSeconds(1 / updatesPerSecond);//limit amount of polling
             yield return new WaitForFixedUpdate();//keep all timers in sync
@@ -146,7 +146,7 @@ public class TimerController : MonoBehaviour
 
         coroutine_updateVisuals = StartCoroutine(UpdateVisuals());
 
-        timerTitleText.text = timerName;
+        if(timerTitleText) timerTitleText.text = timerName;
 
         switch (timerMode)
         {
