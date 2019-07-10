@@ -137,7 +137,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   researchFacilityState: 0
-  tier1Research: []
+  tier1Research:
+  - {fileID: 11400000, guid: 96375487853ebe449afbff3159e2f10d, type: 2}
+  - {fileID: 11400000, guid: 3f651cda0fe7ea741b227727e9e086ed, type: 2}
+  - {fileID: 11400000, guid: 09512f6f5bc9bb546be836154be3e04f, type: 2}
   timerController: {fileID: 7100336189582619224}
   newResearchPromptController: {fileID: 7693933944616317669}
   researchPrompt: {fileID: 26103051882076520}
