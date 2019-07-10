@@ -17,13 +17,7 @@ public class ResearchController : MonoBehaviour
 
     [SerializeField]
     private TimerController timerController;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
+    
     private void OnEnable()
     {
         Init();
@@ -33,12 +27,6 @@ public class ResearchController : MonoBehaviour
     {
         //unsubscribe from events
         timerController.onTimerComplete -= OnNextResearchTime;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        HandleResearch();
     }
 
     private void Init()
@@ -53,38 +41,22 @@ public class ResearchController : MonoBehaviour
 
     private void OnNextResearchTime()
     {
-        researchFacilityState = ResearchFacilityState.ShowResearchIcon;
         Debug.Log("Click on the Researcher!  Research is ready.");
+        ShowResearchIcon();
     }
 
-    private void HandleResearch()
+    private void ShowResearchIcon()
     {
-        switch (researchFacilityState)
-        {
-            case ResearchFacilityState.WaitingForNextResearch:
-                //wait for timer to expire
-                break;
+        researchIcon.SetActive(true);
+        researchFacilityState = ResearchFacilityState.WaitForPlayer;
+    }
 
-            case ResearchFacilityState.ShowResearchIcon:
-                researchIcon.SetActive(true);
-                researchFacilityState = ResearchFacilityState.WaitForPlayer;
-                break;
-
-            case ResearchFacilityState.StartPrompt:
-                //draw random reserach
-                //give data to researchPrompt
-                researchPrompt.SetActive(true);
-                researchFacilityState = ResearchFacilityState.WaitForPlayer;
-                break;
-
-            case ResearchFacilityState.WaitForPlayer:
-                //do nothing while waiting for the Player to make up their mind.
-                break;
-
-            case ResearchFacilityState.Researching:
-                //wait for timer to expire
-                break;
-        }
+    private void ShowResearchPrompt()
+    {
+        //draw random reserach
+        //give data to researchPrompt
+        researchPrompt.SetActive(true);
+        researchFacilityState = ResearchFacilityState.WaitForPlayer;
     }
 
     private static int SumRandomWeights(Research[] researchArray)
@@ -122,14 +94,13 @@ public class ResearchController : MonoBehaviour
 
     public void StartNewResearch()
     {
-        
+        researchFacilityState = ResearchFacilityState.Researching;
     }
 
     public void OnResearchIconPressed()
-    {
+    {//called by Button
         researchIcon.SetActive(false);
-        researchFacilityState = ResearchFacilityState.StartPrompt;
-        //space for coroutines
+        ShowResearchPrompt();
     }
 
 }
