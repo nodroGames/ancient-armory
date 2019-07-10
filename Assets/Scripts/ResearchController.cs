@@ -67,7 +67,7 @@ public class ResearchController : MonoBehaviour
 
     private void PointUITowardsCamera()
     {
-        UIRoot.LookAt(mainCameraTransform);
+        UIRoot.LookAt(-mainCameraTransform.position);
     }
 
     private void InitListeners()
