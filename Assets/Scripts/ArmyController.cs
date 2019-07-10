@@ -2,17 +2,55 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ArmyController : MonoBehaviour
+namespace AncientArmory
 {
-    // Start is called before the first frame update
-    void Start()
+    public class ArmyController : MonoBehaviour
     {
-        
-    }
+        public const int maxSoldierCount = 18;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        [Header("---Battlefield Positions---")]
+        [SerializeField]
+        private Transform[] battlePositions;
+
+        [SerializeField]
+        private Transform newSoldierSpawnPoint;
+
+        [Header("---Soliders---")]
+        [SerializeField]
+        private int currentSoldierLimit = 3;
+
+        [SerializeField]
+        private MercController[] mercsOnBattlefield;
+
+        private int aliveSoldiersCount = 0;
+
+
+        // Start is called before the first frame update
+        void Start()
+        {
+
+        }
+
+        // Update is called once per frame
+        void Update()
+        {
+
+        }
+
+        public void OnSoldierDied()
+        {
+
+        }
+
+        public int GetAliveCombatants()
+        {
+            return aliveSoldiersCount;
+        }
+
+        public void RaiseSoldierLimit(int increment)
+        {
+            currentSoldierLimit += increment;
+            currentSoldierLimit = Mathf.Clamp(currentSoldierLimit, 3, maxSoldierCount);
+        }
     }
 }
