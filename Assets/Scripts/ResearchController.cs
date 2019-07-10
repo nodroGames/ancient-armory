@@ -69,7 +69,7 @@ namespace AncientArmory
 
         private void PointUITowardsCamera()
         {
-            UIRoot.LookAt(-mainCameraTransform.position);
+            UIRoot.LookAt(mainCameraTransform.position);
         }
 
         private void InitListeners()
