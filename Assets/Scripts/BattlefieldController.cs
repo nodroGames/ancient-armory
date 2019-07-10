@@ -6,14 +6,11 @@ namespace AncientArmory
 {
     public class BattlefieldController : MonoBehaviour
     {
-        //possible enemy pool
-        //new enemy rate
-        //next enemy spawn time
+        [SerializeField]
+        private ArmyController playersArmyController;
 
-        //player's mercs pool
-        //available weapons
-        
-        //
+        [SerializeField]
+        private ArmyController enemysArmyController;
 
         // Start is called before the first frame update
         void Start()
