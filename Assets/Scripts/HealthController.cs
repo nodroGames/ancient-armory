@@ -1,7 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 namespace AncientArmory
 {
@@ -11,27 +10,27 @@ namespace AncientArmory
         [SerializeField]
         private Slider healthSlider;
 
+        [SerializeField]
+        private Image healthSliderFill;
+
+        [SerializeField]
+        private TextMeshProUGUI healthTMP;
+
         [Header("---Health Colors---")]
         [SerializeField]
         private HealthColors healthColors;
-
-        // Start is called before the first frame update
-        void Start()
-        {
-
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
-
-        }
-
+        
         public void UpdateHealth(int currentHealth, int maxHealth)
         {
-            healthSlider.value = currentHealth / maxHealth;
-            healthColors.SetHealthColor(currentHealth, maxHealth, healthSlider);
+            var healthPercent = currentHealth / maxHealth;
+
+            if (healthSlider) healthSlider.value = healthPercent;
+            if (healthSliderFill) healthSliderFill.color = healthColors.GetColor(healthPercent);
+            if (healthTMP)
+            {
+                healthColors.SetHealthColor(currentHealth, maxHealth, healthTMP);
+                //improve readout current / max
+            }
         }
     }
-
 }
