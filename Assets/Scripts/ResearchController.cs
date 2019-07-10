@@ -126,12 +126,13 @@ public class ResearchController : MonoBehaviour
     {
         Debug.Log("Rejected offer. No Deal, Howie");
         newResearchPromptController.ToggleVisuals(false);
-        StartGettingNewResearch();
+        StartGettingNewResearch();//get a different one
     }
 
     private void OnResearchComplete()
     {
         Debug.Log("Research Complete!  That is all.");
+        currentResearch.OnResearchComplete();
     }
 
     /// <summary>
