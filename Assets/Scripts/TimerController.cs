@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Events;
 using TMPro;
 
 public class TimerController : MonoBehaviour
@@ -34,8 +35,7 @@ public class TimerController : MonoBehaviour
     private Slider timerSlider;
 
     //event stuff
-    public delegate void OnTimerComplete();
-    public event OnTimerComplete onTimerComplete;
+    public UnityEvent onTimerComplete;
 
     /// <summary>
     /// The Time when this Timer will fire its event.
@@ -124,7 +124,7 @@ public class TimerController : MonoBehaviour
         {
             if(onTimerComplete != null)
             {
-                onTimerComplete();//fire event
+                onTimerComplete.Invoke();//fire event
 
                 OnTimerExpire();//internal stuff
             }

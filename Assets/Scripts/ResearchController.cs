@@ -7,16 +7,22 @@ public class ResearchController : MonoBehaviour
 
     [SerializeField]
     private Research[] tier1Research;
-    
+
+    [Header("---Controllers---")]
+    [SerializeField]
+    private TimerController timerController;
+
+    [SerializeField]
+    private NewResearchPromptController newResearchPromptController;
+
     [Header("---Windows---")]
     [SerializeField]
     private GameObject researchPrompt;
 
     [SerializeField]
     private GameObject researchIcon;
-
-    [SerializeField]
-    private TimerController timerController;
+    
+    private Research currentResearch;
     
     private void OnEnable()
     {
@@ -26,7 +32,7 @@ public class ResearchController : MonoBehaviour
     private void OnDisable()
     {
         //unsubscribe from events
-        timerController.onTimerComplete -= OnNextResearchTime;
+        timerController.onTimerComplete.RemoveListener(OnNextResearchTime);
     }
 
     private void Init()
@@ -36,7 +42,7 @@ public class ResearchController : MonoBehaviour
         researchIcon.SetActive(false);
         researchPrompt.SetActive(false);
 
-        timerController.onTimerComplete += OnNextResearchTime;
+        timerController.onTimerComplete.AddListener(OnNextResearchTime);
     }
 
     private void OnNextResearchTime()
@@ -53,8 +59,6 @@ public class ResearchController : MonoBehaviour
 
     private void ShowResearchPrompt()
     {
-        //draw random reserach
-        //give data to researchPrompt
         researchPrompt.SetActive(true);
         researchFacilityState = ResearchFacilityState.WaitForPlayer;
     }
@@ -95,11 +99,13 @@ public class ResearchController : MonoBehaviour
     public void StartNewResearch()
     {
         researchFacilityState = ResearchFacilityState.Researching;
+        //timerController.StartTimer();
     }
 
     public void OnResearchIconPressed()
     {//called by Button
         researchIcon.SetActive(false);
+        currentResearch = GetRandomResearch(tier1Research);
         ShowResearchPrompt();
     }
 
