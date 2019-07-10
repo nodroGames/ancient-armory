@@ -17,6 +17,9 @@ public class ResearchController : MonoBehaviour
 
     [Header("---UI---")]
     [SerializeField]
+    private Transform UIRoot;
+
+    [SerializeField]
     private GameObject researchIcon;
 
     [Header("---Timer---")]
@@ -27,7 +30,25 @@ public class ResearchController : MonoBehaviour
     /// SO currently loaded.
     /// </summary>
     private Research currentResearch;
-    
+
+    private Transform mainCameraTransform;
+
+    private void Start()
+    {
+        if (!mainCameraTransform)
+        {
+            mainCameraTransform = GameObject.FindGameObjectWithTag("MainCamera").transform as Transform;
+        }
+
+        PointUITowardsCamera();
+    }
+
+    private void Update()
+    {
+
+        PointUITowardsCamera();
+    }
+
     private void OnEnable()
     {
         InitListeners();
@@ -42,6 +63,11 @@ public class ResearchController : MonoBehaviour
         timerController.onTimerComplete.RemoveListener(OnResearchComplete);
         newResearchPromptController.acceptResearch.RemoveListener(OnResearchAccepted);
         newResearchPromptController.rejectResearch.RemoveListener(OnResearchRejected);
+    }
+
+    private void PointUITowardsCamera()
+    {
+        UIRoot.LookAt(mainCameraTransform);
     }
 
     private void InitListeners()
