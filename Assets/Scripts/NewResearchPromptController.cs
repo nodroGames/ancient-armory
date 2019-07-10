@@ -10,6 +10,9 @@ public class NewResearchPromptController : MonoBehaviour
     private TextMeshProUGUI researchInfoText;
 
     [SerializeField]
+    private TextMeshProUGUI researchCostText;
+
+    [SerializeField]
     private TextMeshProUGUI windowTitleText;
 
     [SerializeField]
@@ -38,6 +41,15 @@ public class NewResearchPromptController : MonoBehaviour
         {
             rejectResearch = new UnityEvent();
         }
+    }
+
+    /// <summary>
+    /// Load UI with data from SO.
+    /// </summary>
+    /// <param name="newResearch"></param>
+    public void ReadResearchSO(Research newResearch)
+    {
+
     }
 
     /// <summary>
