@@ -2,8 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ResearchManager : MonoBehaviour
+public class ResearchController : MonoBehaviour
 {
+    [SerializeField]
+    private int initialTimeDelay = 15;
+
     [SerializeField]
     private ResearchFacilityState researchFacilityState;
 
@@ -21,7 +24,11 @@ public class ResearchManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        nextResearchPromptTime = Time.time + initialTimeDelay;
+        researchFacilityState = ResearchFacilityState.WaitingForNextResearch;
+
+        researchIcon.SetActive(false);
+        researchPrompt.SetActive(false);
     }
 
     // Update is called once per frame
