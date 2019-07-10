@@ -28,9 +28,24 @@ namespace AncientArmory
             if (healthSliderFill) healthSliderFill.color = healthColors.GetColor(healthPercent);
             if (healthTMP)
             {
-                healthColors.SetHealthColor(currentHealth, maxHealth, healthTMP);
-                //improve readout current / max
+                var healthOutput = new System.Text.StringBuilder();
+
+                healthOutput.Append(currentHealth.ToString());
+                healthOutput.Append(" / ");
+                healthOutput.Append(maxHealth.ToString());
+
+                healthTMP.text = healthOutput.ToString();
             }
+        }
+
+        public void ToggleTextReadout(bool active)
+        {
+            if (healthTMP) healthTMP.gameObject.SetActive(active);
+        }
+
+        public void ToggleSlider(bool active)
+        {
+            if (healthSlider) healthSlider.gameObject.SetActive(active);
         }
     }
 }
