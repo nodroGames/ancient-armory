@@ -134,6 +134,21 @@ public class TimerController : MonoBehaviour
         }
     }
 
+    private void OnTimerExpire()
+    {
+        onTimerComplete.Invoke();//fire event
+
+        //restart or disable?
+        if (restartAfterTimerFinish)
+        {
+            StartTimer(countdownAmount);
+        }
+        else
+        {
+            this.gameObject.SetActive(false);
+        }
+    }
+
     /// <summary>
     /// 
     /// </summary>
@@ -164,19 +179,9 @@ public class TimerController : MonoBehaviour
         }
     }
 
-    private void OnTimerExpire()
+    public void StopTimer()
     {
-        onTimerComplete.Invoke();//fire event
-
-        //restart or disable?
-        if (restartAfterTimerFinish)
-        {
-            StartTimer(countdownAmount);
-        }
-        else
-        {
-            this.gameObject.SetActive(false);
-        }
+        this.gameObject.SetActive(false);
     }
 
     public void AddTime(float timeToAdd)
