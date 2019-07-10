@@ -13,7 +13,7 @@ public class TimerController : MonoBehaviour
     #endregion
 
     [SerializeField]
-    private bool restartImmediately = false;
+    private bool restartAfterTimerFinish = false;
 
     /// <summary>
     /// 
@@ -48,7 +48,7 @@ public class TimerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        StartTimer(countdownAmount);
+        //StartTimer(countdownAmount);
     }
 
     // Update is called once per frame
@@ -124,8 +124,6 @@ public class TimerController : MonoBehaviour
         {
             if(onTimerComplete != null)
             {
-                onTimerComplete.Invoke();//fire event
-
                 OnTimerExpire();//internal stuff
             }
         }
@@ -136,8 +134,11 @@ public class TimerController : MonoBehaviour
     /// </summary>
     /// <param name="givenTime"></param>
     /// <param name="timerMode"></param>
-    public void StartTimer(float givenTime, string timerName = "", TimerMode timerMode = TimerMode.Countdown)
+    public void StartTimer(float givenTime, string timerName = "", TimerMode timerMode = TimerMode.Countdown, bool restartAfterEnd = false)
     {
+        countdownAmount = givenTime;//cache time in case restarts
+        restartAfterTimerFinish = restartAfterEnd;
+
         if (!this.gameObject.activeSelf)
         {
             this.gameObject.SetActive(true);
@@ -160,8 +161,10 @@ public class TimerController : MonoBehaviour
 
     private void OnTimerExpire()
     {
+        onTimerComplete.Invoke();//fire event
+
         //restart or disable?
-        if (restartImmediately)
+        if (restartAfterTimerFinish)
         {
             StartTimer(countdownAmount);
         }
