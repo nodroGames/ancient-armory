@@ -2,9 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class SpecialResearch : Research
+namespace AncientArmory
 {
+    public abstract class SpecialResearch : Research
+    {
 
-    public abstract void SpecialEffect();
+        public abstract void SpecialEffect();
+
+    }
 
 }

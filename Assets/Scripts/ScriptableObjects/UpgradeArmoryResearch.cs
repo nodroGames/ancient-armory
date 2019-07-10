@@ -1,14 +1,17 @@
 ﻿using UnityEngine;
 
-[CreateAssetMenu(fileName = "UpgradeArmoryResearch_", menuName = "ScriptableObjects/UpgradeArmoryResearch")]
-public class UpgradeArmoryResearch : Research
+namespace AncientArmory
 {
-    [Header("---UpgradeArmoryResearch---")]
-    public float modifierValue = 0.1f;
-
-    public override void OnResearchComplete()
+    [CreateAssetMenu(fileName = "UpgradeArmoryResearch_", menuName = "ScriptableObjects/UpgradeArmoryResearch")]
+    public class UpgradeArmoryResearch : Research
     {
-        base.OnResearchComplete();
-        //increase armory values of some kind.
+        [Header("---UpgradeArmoryResearch---")]
+        public float modifierValue = 0.1f;
+
+        public override void OnResearchComplete()
+        {
+            base.OnResearchComplete();
+            //increase armory values of some kind.
+        }
     }
 }
