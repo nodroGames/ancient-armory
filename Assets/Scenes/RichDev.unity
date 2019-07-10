@@ -484,12 +484,12 @@ PrefabInstance:
     - target: {fileID: 6301441737193451681, guid: 2d83330801e13684eae426db7c5213bf,
         type: 3}
       propertyPath: m_havePropertiesChanged
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6301441737193451681, guid: 2d83330801e13684eae426db7c5213bf,
         type: 3}
       propertyPath: m_isInputParsingRequired
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6301441737139754558, guid: 2d83330801e13684eae426db7c5213bf,
         type: 3}
@@ -524,7 +524,7 @@ PrefabInstance:
     - target: {fileID: 7100336189582619224, guid: 2d83330801e13684eae426db7c5213bf,
         type: 3}
       propertyPath: countdownAmount
-      value: 5
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7100336189582619224, guid: 2d83330801e13684eae426db7c5213bf,
         type: 3}
@@ -539,11 +539,16 @@ PrefabInstance:
     - target: {fileID: 6260313366935111449, guid: 2d83330801e13684eae426db7c5213bf,
         type: 3}
       propertyPath: m_havePropertiesChanged
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6260313366935111449, guid: 2d83330801e13684eae426db7c5213bf,
         type: 3}
       propertyPath: m_isInputParsingRequired
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3956883619867184680, guid: 2d83330801e13684eae426db7c5213bf,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
