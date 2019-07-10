@@ -13,6 +13,7 @@ namespace AncientArmory
         public GameObject Battlefield;
         public GameObject Armory;
         public GameObject Tavern;
+        
         void Start(){
             setup();
         }
@@ -26,12 +27,12 @@ namespace AncientArmory
             Battlefield = GameObject.Find("BattlefieldController");
             Armory = GameObject.Find("ArmoryController");
             Tavern = GameObject.Find("TavernController");
-            Timer = new Timer(); 
+            // Research = GameObject.Find("ResearchController");
         }
 
-        public void putMercInPool(GameObject merc) {
+        public void putMercInPool(GameObject merc, GameObject pool) {
             merc.SetActive(false);
-            merc.transform.parent = this.transform;
+            merc.transform.parent = pool.transform;
         }
 
         public List<GameObject> getPoolContents(GameObject pool) {

@@ -23,8 +23,9 @@ namespace AncientArmory
             if (Tavern.transform.childCount == 0) // if pool is empty
             {
                 // instantiate prefab at spawn position
-                Instantiate(MercPrefab, location);
-                // TODO: attach character script
+                GameObject newMerc = Instantiate(MercPrefab, location);
+                // attach character script
+                newMerc.AddComponent<Character>();
             }
             else // if pool has mercs
             {
