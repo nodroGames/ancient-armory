@@ -18,21 +18,46 @@ public class ResearchController : MonoBehaviour
     [Header("---UI---")]
     [SerializeField]
     private GameObject researchIcon;
+
+    [Header("---Timer---")]
+    [SerializeField]
+    private int timeToGetNewResearch = 5;
     
+    /// <summary>
+    /// SO currently loaded.
+    /// </summary>
     private Research currentResearch;
     
     private void OnEnable()
     {
-        Init();
+        InitListeners();
+
+        StartGettingNewResearch();
     }
 
     private void OnDisable()
     {
         //unsubscribe from events
         timerController.onTimerComplete.RemoveListener(OnNextResearchTime);
+        timerController.onTimerComplete.RemoveListener(OnResearchComplete);
+        newResearchPromptController.acceptResearch.RemoveListener(OnResearchAccepted);
+        newResearchPromptController.rejectResearch.RemoveListener(OnResearchRejected);
     }
 
-    private void Init()
+    private void InitListeners()
+    {
+        //add listeners
+        newResearchPromptController.acceptResearch.AddListener(OnResearchAccepted);
+        newResearchPromptController.rejectResearch.AddListener(OnResearchRejected);
+    }
+
+    private void OnNextResearchTime()
+    {
+        Debug.Log("Click on the Researcher!  Research is ready.");
+        ShowResearchIcon();
+    }
+
+    private void StartGettingNewResearch()
     {
         researchFacilityState = ResearchFacilityState.WaitingForNextResearch;
 
@@ -40,13 +65,7 @@ public class ResearchController : MonoBehaviour
         newResearchPromptController.ToggleVisuals(false);
 
         timerController.onTimerComplete.AddListener(OnNextResearchTime);
-        timerController.StartTimer(15, "Gathering new research...");
-    }
-
-    private void OnNextResearchTime()
-    {
-        Debug.Log("Click on the Researcher!  Research is ready.");
-        ShowResearchIcon();
+        timerController.StartTimer(timeToGetNewResearch, "Gathering new research...");
     }
 
     private void ShowResearchIcon()
@@ -94,16 +113,35 @@ public class ResearchController : MonoBehaviour
         return selectedResearch;
     }
 
-    public void StartNewResearch()
+    private void OnResearchAccepted()
     {
         researchFacilityState = ResearchFacilityState.Researching;
-        //timerController.StartTimer();
+        newResearchPromptController.ToggleVisuals(false);
+        timerController.onTimerComplete.AddListener(OnResearchComplete);
+        timerController.StartTimer(currentResearch.secondsToComplete, "Researching...");
+        //deduct money
     }
 
+    private void OnResearchRejected()
+    {
+        Debug.Log("Rejected offer. No Deal, Howie");
+        newResearchPromptController.ToggleVisuals(false);
+        StartGettingNewResearch();
+    }
+
+    private void OnResearchComplete()
+    {
+        Debug.Log("Research Complete!  That is all.");
+    }
+
+    /// <summary>
+    /// Called by Button.
+    /// </summary>
     public void OnResearchIconPressed()
-    {//called by Button
+    {
         researchIcon.SetActive(false);
         currentResearch = GetRandomResearch(tier1Research);
+        newResearchPromptController.ReadResearchSO(currentResearch);
         ShowResearchPrompt();
     }
 
