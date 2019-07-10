@@ -47,9 +47,11 @@ public class NewResearchPromptController : MonoBehaviour
     /// Load UI with data from SO.
     /// </summary>
     /// <param name="newResearch"></param>
-    public void ReadResearchSO(Research newResearch)
+    public void ReadResearchSO(Research researchSO)
     {
-
+        researchInfoText.text = researchSO.description;
+        researchCostText.text = researchSO.goldCost.ToString();
+        windowTitleText.text = researchSO.researchName.ToString();
     }
 
     /// <summary>
