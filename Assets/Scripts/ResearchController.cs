@@ -1,34 +1,38 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class ResearchController : MonoBehaviour
 {
-    [SerializeField]
-    private int initialTimeDelay = 15;
-
     [SerializeField]
     private ResearchFacilityState researchFacilityState;
 
     [SerializeField]
     private Research[] tier1Research;
-
-    private float nextResearchPromptTime;
-
+    
+    [Header("---Windows---")]
     [SerializeField]
     private GameObject researchPrompt;
 
     [SerializeField]
     private GameObject researchIcon;
 
+    [SerializeField]
+    private TimerController timerController;
+
     // Start is called before the first frame update
     void Start()
     {
-        nextResearchPromptTime = Time.time + initialTimeDelay;
-        researchFacilityState = ResearchFacilityState.WaitingForNextResearch;
 
-        researchIcon.SetActive(false);
-        researchPrompt.SetActive(false);
+    }
+
+    private void OnEnable()
+    {
+        Init();
+    }
+
+    private void OnDisable()
+    {
+        //unsubscribe from events
+        timerController.onTimerComplete -= OnNextResearchTime;
     }
 
     // Update is called once per frame
@@ -37,19 +41,28 @@ public class ResearchController : MonoBehaviour
         HandleResearch();
     }
 
+    private void Init()
+    {
+        researchFacilityState = ResearchFacilityState.WaitingForNextResearch;
+
+        researchIcon.SetActive(false);
+        researchPrompt.SetActive(false);
+
+        timerController.onTimerComplete += OnNextResearchTime;
+    }
+
+    private void OnNextResearchTime()
+    {
+        researchFacilityState = ResearchFacilityState.ShowResearchIcon;
+        Debug.Log("Click on the Researcher!  Research is ready.");
+    }
+
     private void HandleResearch()
     {
         switch (researchFacilityState)
         {
             case ResearchFacilityState.WaitingForNextResearch:
-                if(Time.time > nextResearchPromptTime)
-                {
-                    researchFacilityState = ResearchFacilityState.ShowResearchIcon;//move on to next state
-                }
-                else
-                {
-                    UpdateVisuals();
-                }
+                //wait for timer to expire
                 break;
 
             case ResearchFacilityState.ShowResearchIcon:
@@ -69,7 +82,7 @@ public class ResearchController : MonoBehaviour
                 break;
 
             case ResearchFacilityState.Researching:
-                UpdateVisuals();
+                //wait for timer to expire
                 break;
         }
     }
@@ -105,11 +118,6 @@ public class ResearchController : MonoBehaviour
         }
 
         return selectedResearch;
-    }
-
-    private void UpdateVisuals()
-    {
-
     }
 
     public void StartNewResearch()
