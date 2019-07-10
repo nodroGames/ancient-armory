@@ -161,6 +161,7 @@ namespace AncientArmory
         {
             Debug.Log("Research Complete!  That is all.");
             currentResearch.OnResearchComplete();
+            StartGettingNewResearch();
         }
 
         /// <summary>
