@@ -7,6 +7,9 @@ public class TimerController : MonoBehaviour
     [SerializeField]
     private TimerMode timerMode;
 
+    [SerializeField]
+    private float timerEndTime;
+    
     [Header("---UI Elements---")]
     [SerializeField]
     private TextMeshProUGUI timerText;
@@ -23,7 +26,16 @@ public class TimerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        HandleTimer();
+    }
+
+    private void HandleTimer()
+    {
+        if (Time.time > timerEndTime)
+        {
+            //fire event
+        }
+
     }
 
     public void StartTimer(float givenTime, TimerMode timerMode = TimerMode.Countdown)

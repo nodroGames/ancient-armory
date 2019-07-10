@@ -50,6 +50,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f17c3c50b443579489a8fca28e8e542d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  timerMode: 0
+  timerEndTime: 0
+  timerText: {fileID: 7428807922685894535}
+  timerSlider: {fileID: 7428807922725226362}
 --- !u!1 &7428807921868526599
 GameObject:
   m_ObjectHideFlags: 0
