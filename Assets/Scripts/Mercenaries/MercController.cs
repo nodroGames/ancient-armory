@@ -38,6 +38,8 @@ namespace AncientArmory
         {
             currentHealth = maxHealth;
             GatherReferences();
+
+            healthController.UpdateHealth(currentHealth, maxHealth);
         }
 
         // Update is called once per frame
