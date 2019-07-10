@@ -46,6 +46,7 @@ namespace AncientArmory
         void Update()
         {
 
+            healthController.UpdateHealth(currentHealth, maxHealth);
         }
 
         private void GatherReferences()
