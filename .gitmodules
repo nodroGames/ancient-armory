@@ -1,3 +1,3 @@
 [submodule "Assets/3rdParty/RpgDB"]
 	path = Assets/3rdParty/RpgDB
-	url = git@github.com:eddie-knight/RpgDB.git
+	url = https://github.com/eddie-knight/RpgDB
