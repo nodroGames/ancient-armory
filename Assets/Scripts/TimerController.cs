@@ -149,6 +149,7 @@ namespace AncientArmory
             }
             else
             {
+                //reset timer
                 timerIsActive = false;
                 onTimerComplete.RemoveAllListeners();
                 StopAllCoroutines();
