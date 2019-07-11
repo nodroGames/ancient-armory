@@ -9,14 +9,17 @@ namespace AncientArmory
         [Header("Colors")]
         [SerializeField]
         private  Color color_HealthHigh;
+        
         [SerializeField]
         private  Color color_HealthLow;
+
         [SerializeField]
         private Color color_HealthDanger;
 
         [Header("Limits")]
         [SerializeField]
         private float limit_HealthLow = .25f;
+
         [SerializeField]
         private float limit_HealthDanger = .10f;
 
