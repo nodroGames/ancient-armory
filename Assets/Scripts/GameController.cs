@@ -9,7 +9,7 @@ namespace AncientArmory
         [HideInInspector] public GameDatabase GameDatabase;
 
         void Awake() {
-            GameDatabase = GameObject.Find("GameDatabase").GetComponent<GameDatabase>();
+            // GameDatabase = GameObject.Find("GameDatabase").GetComponent<GameDatabase>();
         }
 
         void Start() {

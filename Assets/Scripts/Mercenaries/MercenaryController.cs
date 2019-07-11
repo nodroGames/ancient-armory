@@ -8,13 +8,12 @@ namespace AncientArmory
 {
     public abstract class MercenaryController : MonoBehaviour
     {
-        public Timer Timer;
         public GameDatabase GameDatabase;
         public GameObject Battlefield;
         public GameObject Armory;
         public GameObject Tavern;
-        
-        void Start(){
+
+        public void Start(){
             setup();
         }
 
@@ -25,7 +24,7 @@ namespace AncientArmory
         public void setup() {
             GameDatabase = GameObject.Find("GameDatabase").GetComponent<RpgDB.GameDatabase>();
             Battlefield = GameObject.Find("BattlefieldController");
-            Armory = GameObject.Find("ArmoryController");
+            // Armory = GameObject.Find("ArmoryController");
             Tavern = GameObject.Find("TavernController");
             // Research = GameObject.Find("ResearchController");
         }

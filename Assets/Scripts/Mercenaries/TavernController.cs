@@ -12,6 +12,8 @@ namespace AncientArmory
         public GameObject MercPrefab;
         void Start(){
             setup();
+            spawnMerc(Battlefield.transform);
+            spawnMerc(Battlefield.transform);
         }
 
         // 
@@ -19,22 +21,26 @@ namespace AncientArmory
         // Helper Functions
 
         void spawnMerc(Transform location) {
-            MercsSpawned++;
+            GameObject newMerc;
             if (Tavern.transform.childCount == 0) // if pool is empty
             {
                 // instantiate prefab at spawn position
-                GameObject newMerc = Instantiate(MercPrefab, location);
+                newMerc = Instantiate(MercPrefab, location);
+                GameDatabase.Classes.CreateCharacter(newMerc, "Soldier", ++MercsSpawned, GameDatabase.Extensions);
                 // attach character script
-                newMerc.AddComponent<Character>();
             }
             else // if pool has mercs
             {
-                // TODO: relocate to spawn position
-                getPoolContents(Tavern)[0].SetActive(true);
-                getPoolContents(Tavern)[0].transform.parent = location.transform;
+                // Relocate to spawn position
+                newMerc = getPoolContents(Tavern)[0];
+                newMerc.SetActive(true);
+                newMerc.transform.parent = location.transform;
             }
+            // Set merc level and increase MercsSpawned counter
+            Character merc = newMerc.GetComponent<Character>();
+            merc.Level = MercsSpawned;
+            // merc.Left_Hand = GameDatabase.Weapons.GetByName("Bow");
             // TODO: assign stats based on the number of MercsSpawned
         }
-
     }
 }
