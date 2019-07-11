@@ -3,97 +3,38 @@ using System.Collections;
 
 namespace AncientArmory
 {
-    public class ResearchController : MonoBehaviour
+    public class ResearchController : ControllerBase
     {
+        [Header("---ResearchController---")]
         [SerializeField]
-        private Research[] tier1Research;
+        private Research[] researchArray;
 
-        [Header("---Controllers---")]
-        [SerializeField]
-        private TimerController timerController;
-
-        [SerializeField]
-        private NewResearchPromptController newResearchPromptController;
-
-        [Header("---UI---")]
-        [SerializeField]
-        private Transform UIRoot;
-
-        [SerializeField]
-        private GameObject researchIcon;
-
-        [SerializeField]
-        private GameObject researchCompleteWindow;
-
-        [Header("---Timer---")]
-        [SerializeField]
-        private int timeToGetNewResearch = 5;
-
-        /// <summary>
-        /// SO currently loaded.
-        /// </summary>
         private Research currentResearch;
 
-        private Transform mainCameraTransform;
-
-        private void Start()
+        protected override void Start()
         {
-            if (!mainCameraTransform)
-            {
-                mainCameraTransform = GameObject.FindGameObjectWithTag("MainCamera").transform as Transform;
-            }
-
-            PointUITowardsCamera();
+            base.Start();
         }
 
-        private void Update()
+        protected override void OnDisable()
         {
-            PointUITowardsCamera();
-        }
-
-        private void OnEnable()
-        {
-            InitListeners();
-            
-            StartGettingNewResearch();
-        }
-
-        private void OnDisable()
-        {
-            //unsubscribe from events
-            timerController.onTimerComplete.RemoveListener(OnNextResearchTime);
+            base.OnDisable();
             timerController.onTimerComplete.RemoveListener(OnResearchComplete);
-            newResearchPromptController.acceptResearch.RemoveListener(OnResearchAccepted);
-            newResearchPromptController.rejectResearch.RemoveListener(OnResearchRejected);
         }
 
-        private void PointUITowardsCamera()
+        protected override void OnLeftButton()//accept
         {
-            UIRoot.LookAt(mainCameraTransform.position);
+            base.OnLeftButton();//remove to disable debug
+
+            infoPromptController.ToggleVisuals(false);
+            timerController.onTimerComplete.AddListener(OnResearchComplete);
+            timerController.StartTimer(currentResearch.secondsToComplete, inProcessMessage);//start researching thing
         }
 
-        private void InitListeners()
+        protected override void OnRightButton()//reject
         {
-            //add listeners
-            newResearchPromptController.acceptResearch.AddListener(OnResearchAccepted);
-            newResearchPromptController.rejectResearch.AddListener(OnResearchRejected);
-        }
-
-        private void OnNextResearchTime()
-        {
-            Debug.Log("Click on the Researcher!  Research is ready.");
-            timerController.onTimerComplete.AddListener(OnNextResearchTime);
-            ShowResearchIcon();
-        }
-
-        private void ShowResearchIcon()
-        {
-            researchIcon.SetActive(true);
-        }
-
-        private void ShowResearchPrompt()
-        {
-            newResearchPromptController.ToggleVisuals(true);
+            base.OnRightButton();// remove to disable debug
+            StartTimerCycle();//get a different one
         }
 
         private static int SumRandomWeights(Research[] researchArray)
@@ -128,39 +69,7 @@ namespace AncientArmory
 
             return selectedResearch;
         }
-
-        private void StartGettingNewResearch()
-        {
-            //hide UI elements
-            researchIcon.SetActive(false);
-            newResearchPromptController.ToggleVisuals(false);
-            researchCompleteWindow.SetActive(false);
-
-            timerController.onTimerComplete.AddListener(OnNextResearchTime);
-            timerController.StartTimer(timeToGetNewResearch, "Gathering new Research...");//Gathering new research...
-        }
-
-        /// <summary>
-        /// Called by Button.
-        /// </summary>
-        private void OnResearchAccepted()
-        {
-            Debug.Log("Research Accepted.");
-            newResearchPromptController.ToggleVisuals(false);
-            timerController.onTimerComplete.AddListener(OnResearchComplete);
-            timerController.StartTimer(currentResearch.secondsToComplete, "Researching...");
-            //deduct money
-        }
-
-        /// <summary>
-        /// Called by Button.
-        /// </summary>
-        private void OnResearchRejected()
-        {
-            Debug.Log("Rejected offer. No Deal, Howie");
-            StartGettingNewResearch();//get a different one
-        }
-
+        
         /// <summary>
         /// Called by Timer Event.
         /// </summary>
@@ -169,34 +78,18 @@ namespace AncientArmory
             Debug.Log("Research Complete! Increment up!");
             currentResearch.OnResearchComplete();
             timerController.onTimerComplete.RemoveListener(OnResearchComplete);
-            StartCoroutine(ShowResearchCompleteWindow());//show message to player
-            //StartGettingNewResearch();//do so immediately
-        }
-
-        /// <summary>
-        /// Show happy success image to player before restarting.
-        /// </summary>
-        /// <param name="moment"></param>
-        /// <returns></returns>
-        private IEnumerator ShowResearchCompleteWindow(float moment = 2)
-        {
-            researchCompleteWindow.SetActive(true);
-
-            yield return new WaitForSeconds(moment);
-            
-            StartGettingNewResearch();
+            StartCoroutine(ShowCompleteWindow());//show message to player
+            //TimerCycle();//or do so immediately
         }
 
         /// <summary>
         /// Called by Button.
         /// </summary>
-        public void OnResearchIconPressed()
+        public override void OnReadyIconPressed()
         {
-            researchIcon.SetActive(false);
-            currentResearch = GetRandomResearch(tier1Research);
-            newResearchPromptController.ReadResearchSO(currentResearch);
-            ShowResearchPrompt();
+            base.OnReadyIconPressed();
+            currentResearch = GetRandomResearch(researchArray);
+            infoPromptController.LoadInfo(currentResearch);
         }
-
     }
 }

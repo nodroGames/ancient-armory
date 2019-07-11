@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2552512576045502572}
   m_Layer: 0
   m_Name: BattlefieldController
-  m_TagString: Untagged
+  m_TagString: BattlefieldController
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -47,5 +47,3 @@ MonoBehaviour:
   Battlefield: {fileID: 0}
   Armory: {fileID: 0}
   Tavern: {fileID: 0}
-  MercsSpawned: 0
-  MercPrefab: {fileID: 0}

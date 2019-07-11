@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: UpgradeArmoryResearch_1
   m_EditorClassIdentifier: 
   researchName: Research
-  secondsToComplete: 10
+  secondsToComplete: 0
   goldCost: 100
   randomWeight: 100
   tier: 0

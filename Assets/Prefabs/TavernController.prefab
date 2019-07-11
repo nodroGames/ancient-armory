@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3598207322743657984}
   m_Layer: 0
   m_Name: TavernController
-  m_TagString: Untagged
+  m_TagString: TavernController
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
