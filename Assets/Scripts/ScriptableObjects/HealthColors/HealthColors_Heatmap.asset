@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb44ec6f277f60d4782361bed48201bc, type: 3}
+  m_Name: HealthColors_Standard
+  m_EditorClassIdentifier: 
+  color_HealthHigh: {r: 0.015129928, g: 0.8018868, b: 0.18797655, a: 1}
+  color_HealthHalf: {r: 0.7793758, g: 1, b: 0, a: 1}
+  color_HealthLow: {r: 1, g: 0.7427106, b: 0, a: 1}
+  color_HealthDanger: {r: 1, g: 0, b: 0.24087381, a: 1}
+  limit_HealthHalf: 0.5
+  limit_HealthLow: 0.25
+  limit_HealthDanger: 0.1
