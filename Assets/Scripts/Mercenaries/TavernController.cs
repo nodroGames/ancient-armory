@@ -1,16 +1,18 @@
 using UnityEngine;
-using System.Timers; 
 using System.Collections;
 using System.Collections.Generic;
 using RpgDB;
 
 namespace AncientArmory
 {
-    public sealed class TavernController : MercenaryController
+    public sealed class TavernController : PoolController
     {
         public int MercsSpawned;
         public GameObject MercPrefab;
-        void Start(){
+
+        void Start()
+        {
+            base.Start();
             setup();
             InitiateRecruiting();
         }
@@ -24,7 +26,8 @@ namespace AncientArmory
         //
         // Helper Functions
 
-        GameObject spawnMerc() {
+        GameObject spawnMerc()
+        {
             GameObject newMerc;
             Character merc;
             if (Tavern.transform.childCount == 0) // if pool is empty

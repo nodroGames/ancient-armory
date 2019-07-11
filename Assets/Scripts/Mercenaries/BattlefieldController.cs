@@ -6,7 +6,7 @@ using RpgDB;
 
 namespace AncientArmory
 {
-    public sealed class BattlefieldController : MercenaryController
+    public sealed class BattlefieldController : PoolController
     {
         bool InitialLoadComplete;
         List<GameObject> MercPool;
