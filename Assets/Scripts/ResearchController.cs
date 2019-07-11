@@ -1,149 +1,179 @@
 ﻿using UnityEngine;
 
-public class ResearchController : MonoBehaviour
+namespace AncientArmory
 {
-    [SerializeField]
-    private ResearchFacilityState researchFacilityState;
-
-    [SerializeField]
-    private Research[] tier1Research;
-
-    [Header("---Controllers---")]
-    [SerializeField]
-    private TimerController timerController;
-
-    [SerializeField]
-    private NewResearchPromptController newResearchPromptController;
-
-    [Header("---UI---")]
-    [SerializeField]
-    private GameObject researchIcon;
-
-    [Header("---Timer---")]
-    [SerializeField]
-    private int timeToGetNewResearch = 5;
-    
-    /// <summary>
-    /// SO currently loaded.
-    /// </summary>
-    private Research currentResearch;
-    
-    private void OnEnable()
+    public class ResearchController : MonoBehaviour
     {
-        InitListeners();
+        [SerializeField]
+        private ResearchFacilityState researchFacilityState;
 
-        StartGettingNewResearch();
-    }
+        [SerializeField]
+        private Research[] tier1Research;
 
-    private void OnDisable()
-    {
-        //unsubscribe from events
-        timerController.onTimerComplete.RemoveListener(OnNextResearchTime);
-        timerController.onTimerComplete.RemoveListener(OnResearchComplete);
-        newResearchPromptController.acceptResearch.RemoveListener(OnResearchAccepted);
-        newResearchPromptController.rejectResearch.RemoveListener(OnResearchRejected);
-    }
+        [Header("---Controllers---")]
+        [SerializeField]
+        private TimerController timerController;
 
-    private void InitListeners()
-    {
-        //add listeners
-        newResearchPromptController.acceptResearch.AddListener(OnResearchAccepted);
-        newResearchPromptController.rejectResearch.AddListener(OnResearchRejected);
-    }
+        [SerializeField]
+        private NewResearchPromptController newResearchPromptController;
 
-    private void OnNextResearchTime()
-    {
-        Debug.Log("Click on the Researcher!  Research is ready.");
-        ShowResearchIcon();
-    }
+        [Header("---UI---")]
+        [SerializeField]
+        private Transform UIRoot;
 
-    private void StartGettingNewResearch()
-    {
-        researchFacilityState = ResearchFacilityState.WaitingForNextResearch;
+        [SerializeField]
+        private GameObject researchIcon;
 
-        researchIcon.SetActive(false);
-        newResearchPromptController.ToggleVisuals(false);
+        [Header("---Timer---")]
+        [SerializeField]
+        private int timeToGetNewResearch = 5;
 
-        timerController.onTimerComplete.AddListener(OnNextResearchTime);
-        timerController.StartTimer(timeToGetNewResearch, "Gathering new research...");
-    }
+        /// <summary>
+        /// SO currently loaded.
+        /// </summary>
+        private Research currentResearch;
 
-    private void ShowResearchIcon()
-    {
-        researchIcon.SetActive(true);
-        researchFacilityState = ResearchFacilityState.WaitForPlayer;
-    }
+        private Transform mainCameraTransform;
 
-    private void ShowResearchPrompt()
-    {
-        newResearchPromptController.ToggleVisuals(true);
-        researchFacilityState = ResearchFacilityState.WaitForPlayer;
-    }
-
-    private static int SumRandomWeights(Research[] researchArray)
-    {
-        var weightSum = 0;
-
-        foreach(var research in researchArray)
+        private void Start()
         {
-            weightSum += research.randomWeight;
+            if (!mainCameraTransform)
+            {
+                mainCameraTransform = GameObject.FindGameObjectWithTag("MainCamera").transform as Transform;
+            }
+
+            PointUITowardsCamera();
         }
 
-        return weightSum;
-    }
-
-    private static Research GetRandomResearch(Research[] researchArray)
-    {
-        var randomWeight = Random.Range(0, SumRandomWeights(researchArray));
-        Research selectedResearch = null;
-
-        foreach(var research in researchArray)
+        private void Update()
         {
-            if(randomWeight < research.randomWeight)
-            {
-                selectedResearch = research;
-                break;
-            }
-            else
-            {
-                randomWeight -= research.randomWeight;
-            }
+
+            PointUITowardsCamera();
         }
 
-        return selectedResearch;
-    }
+        private void OnEnable()
+        {
+            InitListeners();
 
-    private void OnResearchAccepted()
-    {
-        researchFacilityState = ResearchFacilityState.Researching;
-        newResearchPromptController.ToggleVisuals(false);
-        timerController.onTimerComplete.AddListener(OnResearchComplete);
-        timerController.StartTimer(currentResearch.secondsToComplete, "Researching...");
-        //deduct money
-    }
+            StartGettingNewResearch();
+        }
 
-    private void OnResearchRejected()
-    {
-        Debug.Log("Rejected offer. No Deal, Howie");
-        newResearchPromptController.ToggleVisuals(false);
-        StartGettingNewResearch();//get a different one
-    }
+        private void OnDisable()
+        {
+            //unsubscribe from events
+            timerController.onTimerComplete.RemoveListener(OnNextResearchTime);
+            timerController.onTimerComplete.RemoveListener(OnResearchComplete);
+            newResearchPromptController.acceptResearch.RemoveListener(OnResearchAccepted);
+            newResearchPromptController.rejectResearch.RemoveListener(OnResearchRejected);
+        }
 
-    private void OnResearchComplete()
-    {
-        Debug.Log("Research Complete!  That is all.");
-        currentResearch.OnResearchComplete();
-    }
+        private void PointUITowardsCamera()
+        {
+            UIRoot.LookAt(mainCameraTransform.position);
+        }
 
-    /// <summary>
-    /// Called by Button.
-    /// </summary>
-    public void OnResearchIconPressed()
-    {
-        researchIcon.SetActive(false);
-        currentResearch = GetRandomResearch(tier1Research);
-        newResearchPromptController.ReadResearchSO(currentResearch);
-        ShowResearchPrompt();
-    }
+        private void InitListeners()
+        {
+            //add listeners
+            newResearchPromptController.acceptResearch.AddListener(OnResearchAccepted);
+            newResearchPromptController.rejectResearch.AddListener(OnResearchRejected);
+        }
 
+        private void OnNextResearchTime()
+        {
+            Debug.Log("Click on the Researcher!  Research is ready.");
+            ShowResearchIcon();
+        }
+
+        private void StartGettingNewResearch()
+        {
+            researchFacilityState = ResearchFacilityState.WaitingForNextResearch;
+
+            researchIcon.SetActive(false);
+            newResearchPromptController.ToggleVisuals(false);
+
+            timerController.onTimerComplete.AddListener(OnNextResearchTime);
+            timerController.StartTimer(timeToGetNewResearch, "Gathering new research...");
+        }
+
+        private void ShowResearchIcon()
+        {
+            researchIcon.SetActive(true);
+            researchFacilityState = ResearchFacilityState.WaitForPlayer;
+        }
+
+        private void ShowResearchPrompt()
+        {
+            newResearchPromptController.ToggleVisuals(true);
+            researchFacilityState = ResearchFacilityState.WaitForPlayer;
+        }
+
+        private static int SumRandomWeights(Research[] researchArray)
+        {
+            var weightSum = 0;
+
+            foreach (var research in researchArray)
+            {
+                weightSum += research.randomWeight;
+            }
+
+            return weightSum;
+        }
+
+        private static Research GetRandomResearch(Research[] researchArray)
+        {
+            var randomWeight = Random.Range(0, SumRandomWeights(researchArray));
+            Research selectedResearch = null;
+
+            foreach (var research in researchArray)
+            {
+                if (randomWeight < research.randomWeight)
+                {
+                    selectedResearch = research;
+                    break;
+                }
+                else
+                {
+                    randomWeight -= research.randomWeight;
+                }
+            }
+
+            return selectedResearch;
+        }
+
+        private void OnResearchAccepted()
+        {
+            researchFacilityState = ResearchFacilityState.Researching;
+            newResearchPromptController.ToggleVisuals(false);
+            timerController.onTimerComplete.AddListener(OnResearchComplete);
+            timerController.StartTimer(currentResearch.secondsToComplete, "Researching...");
+            //deduct money
+        }
+
+        private void OnResearchRejected()
+        {
+            Debug.Log("Rejected offer. No Deal, Howie");
+            newResearchPromptController.ToggleVisuals(false);
+            StartGettingNewResearch();//get a different one
+        }
+
+        private void OnResearchComplete()
+        {
+            Debug.Log("Research Complete!  That is all.");
+            currentResearch.OnResearchComplete();
+            StartGettingNewResearch();
+        }
+
+        /// <summary>
+        /// Called by Button.
+        /// </summary>
+        public void OnResearchIconPressed()
+        {
+            researchIcon.SetActive(false);
+            currentResearch = GetRandomResearch(tier1Research);
+            newResearchPromptController.ReadResearchSO(currentResearch);
+            ShowResearchPrompt();
+        }
+
+    }
 }
