@@ -22,7 +22,8 @@ namespace AncientArmory
         
         public void UpdateHealth(int currentHealth, int maxHealth)
         {
-            var healthPercent = currentHealth / maxHealth;
+            var healthPercent = (float)currentHealth / (float)maxHealth;
+            Debug.Log(healthPercent);
 
             if (healthSlider) healthSlider.value = healthPercent;
             if (healthSliderFill) healthSliderFill.color = healthColors.GetColor(healthPercent);
