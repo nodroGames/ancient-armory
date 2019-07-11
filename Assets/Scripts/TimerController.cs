@@ -44,6 +44,8 @@ namespace AncientArmory
 
         private float cachedTimerDuration;
 
+        private bool timerIsActive = false;
+
         // Start is called before the first frame update
         void Start()
         {
@@ -57,14 +59,14 @@ namespace AncientArmory
         // Update is called once per frame
         void Update()
         {
-            HandleTimer();
+            if(timerIsActive) HandleTimer();
         }
 
         private void OnDisable()
         {
             StopAllCoroutines();
         }
-
+        
         private void OnValidate()
         {
             updatesPerSecond = Mathf.Clamp(updatesPerSecond, 1, 30);
@@ -129,6 +131,10 @@ namespace AncientArmory
                 {
                     OnTimerExpire();//internal stuff
                 }
+                else
+                {
+                    Debug.Log("event is null");
+                }
             }
         }
 
@@ -143,8 +149,11 @@ namespace AncientArmory
             }
             else
             {
-                this.gameObject.SetActive(false);
+                //reset timer
+                timerIsActive = false;
                 onTimerComplete.RemoveAllListeners();
+                StopAllCoroutines();
+                ToggleVisuals(false);
             }
         }
 
@@ -158,11 +167,9 @@ namespace AncientArmory
             cachedTimerDuration = givenTime;//cache time in case restarts
             restartAfterTimerFinish = restartAfterEnd;//cache
 
-            if (!this.gameObject.activeSelf)//set active if not already
-            {
-                this.gameObject.SetActive(true);
-            }
-
+            timerIsActive = true;
+            ToggleVisuals(true);
+            
             switch (timerMode)
             {
                 case TimerMode.Countdown://fire alarm after this much time passes
@@ -178,14 +185,16 @@ namespace AncientArmory
             coroutine_updateVisuals = StartCoroutine(UpdateVisuals());
         }
 
-        public void StopTimer()
-        {
-            this.gameObject.SetActive(false);
-        }
-
         public void AddTime(float timeToAdd)
         {
             timerEndTime += timeToAdd;
+        }
+
+        public void ToggleVisuals(bool active)
+        {
+            timerSlider.gameObject.SetActive(active);
+            timerTitleText.gameObject.SetActive(active);
+            timerText.gameObject.SetActive(active);
         }
     }
 }

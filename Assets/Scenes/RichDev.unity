@@ -197,6 +197,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Merc
       objectReference: {fileID: 0}
+    - target: {fileID: 1403660842192184, guid: a6243ef2f6e6341eda1bea872c935617, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4520880673542928, guid: a6243ef2f6e6341eda1bea872c935617, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -244,12 +248,12 @@ PrefabInstance:
     - target: {fileID: 314570718495691650, guid: a6243ef2f6e6341eda1bea872c935617,
         type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 314570718495691650, guid: a6243ef2f6e6341eda1bea872c935617,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4074663514014881780, guid: a6243ef2f6e6341eda1bea872c935617,
         type: 3}
@@ -517,7 +521,7 @@ PrefabInstance:
     - target: {fileID: 262592437551544683, guid: 2d83330801e13684eae426db7c5213bf,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.98
+      value: 2.72
       objectReference: {fileID: 0}
     - target: {fileID: 262592437551544683, guid: 2d83330801e13684eae426db7c5213bf,
         type: 3}
@@ -527,7 +531,7 @@ PrefabInstance:
     - target: {fileID: 262592437551544683, guid: 2d83330801e13684eae426db7c5213bf,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 11.4
+      value: 3.24
       objectReference: {fileID: 0}
     - target: {fileID: 262592437551544683, guid: 2d83330801e13684eae426db7c5213bf,
         type: 3}
@@ -573,11 +577,6 @@ PrefabInstance:
         type: 3}
       propertyPath: initialTimeDelay
       value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 262592437551544682, guid: 2d83330801e13684eae426db7c5213bf,
-        type: 3}
-      propertyPath: timeToGetNewResearch
-      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 262592436569810044, guid: 2d83330801e13684eae426db7c5213bf,
         type: 3}
@@ -683,6 +682,36 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: 180
+      objectReference: {fileID: 0}
+    - target: {fileID: 5215731011757067225, guid: 2d83330801e13684eae426db7c5213bf,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3485830717925613539, guid: 2d83330801e13684eae426db7c5213bf,
+        type: 3}
+      propertyPath: m_textInfo.characterCount
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 3485830717925613539, guid: 2d83330801e13684eae426db7c5213bf,
+        type: 3}
+      propertyPath: m_textInfo.spaceCount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3485830717925613539, guid: 2d83330801e13684eae426db7c5213bf,
+        type: 3}
+      propertyPath: m_textInfo.wordCount
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3485830717925613539, guid: 2d83330801e13684eae426db7c5213bf,
+        type: 3}
+      propertyPath: m_textInfo.lineCount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3485830717925613539, guid: 2d83330801e13684eae426db7c5213bf,
+        type: 3}
+      propertyPath: m_textInfo.pageCount
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2d83330801e13684eae426db7c5213bf, type: 3}

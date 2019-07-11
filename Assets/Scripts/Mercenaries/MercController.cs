@@ -27,7 +27,7 @@ namespace AncientArmory
 
         [Header("---UI---")]
         [SerializeField]
-        private HealthController healthController;
+        private HealthUIController healthController;
 
         //member Components
         private Animator myAnimator;
@@ -46,7 +46,7 @@ namespace AncientArmory
         void Update()
         {
 
-            healthController.UpdateHealth(currentHealth, maxHealth);
+            //healthController.UpdateHealth(currentHealth, maxHealth);
         }
 
         private void GatherReferences()

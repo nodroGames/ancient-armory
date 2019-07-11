@@ -4,7 +4,7 @@ using TMPro;
 
 namespace AncientArmory
 {
-    public class HealthController : MonoBehaviour
+    public class HealthUIController : MonoBehaviour
     {
         [Header("---UI Elements---")]
         [SerializeField]
@@ -22,10 +22,12 @@ namespace AncientArmory
         
         public void UpdateHealth(int currentHealth, int maxHealth)
         {
-            var healthPercent = currentHealth / maxHealth;
+            var healthPercent = (float)currentHealth / (float)maxHealth;
 
             if (healthSlider) healthSlider.value = healthPercent;
+
             if (healthSliderFill) healthSliderFill.color = healthColors.GetColor(healthPercent);
+
             if (healthTMP)
             {
                 var healthOutput = new System.Text.StringBuilder();

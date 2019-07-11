@@ -52,5 +52,13 @@ namespace AncientArmory
             currentSoldierLimit += increment;
             currentSoldierLimit = Mathf.Clamp(currentSoldierLimit, 3, maxSoldierCount);
         }
+
+        //public Transform GetOpenPosition()
+        //{
+        //    foreach(var position in battlePositions)
+        //    {
+        //        if()
+        //    }
+        //}
     }
 }
