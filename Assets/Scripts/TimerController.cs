@@ -140,20 +140,20 @@ namespace AncientArmory
 
         private void OnTimerExpire()
         {
-            onTimerComplete.Invoke();//fire event
 
             //restart or disable?
             if (restartAfterTimerFinish)
             {
+                onTimerComplete.Invoke();//fire event
                 StartTimer(cachedTimerDuration);
             }
             else
             {
                 //reset timer
                 timerIsActive = false;
-                onTimerComplete.RemoveAllListeners();
                 StopAllCoroutines();
                 ToggleVisuals(false);
+                onTimerComplete.Invoke();//fire event
             }
         }
 

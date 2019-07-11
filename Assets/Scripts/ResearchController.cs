@@ -82,6 +82,7 @@ namespace AncientArmory
         private void OnNextResearchTime()
         {
             Debug.Log("Click on the Researcher!  Research is ready.");
+            timerController.onTimerComplete.AddListener(OnNextResearchTime);
             ShowResearchIcon();
         }
 
@@ -167,8 +168,9 @@ namespace AncientArmory
         {
             Debug.Log("Research Complete! Increment up!");
             currentResearch.OnResearchComplete();
-            StartCoroutine(WaitAMoment());
-            //StartGettingNewResearch(); //recursion problem!!!!! 
+            timerController.onTimerComplete.RemoveListener(OnResearchComplete);
+            StartCoroutine(ShowResearchCompleteWindow());//show message to player
+            //StartGettingNewResearch();//do so immediately
         }
 
         /// <summary>
@@ -176,7 +178,7 @@ namespace AncientArmory
         /// </summary>
         /// <param name="moment"></param>
         /// <returns></returns>
-        private IEnumerator WaitAMoment(float moment = 2)
+        private IEnumerator ShowResearchCompleteWindow(float moment = 2)
         {
             researchCompleteWindow.SetActive(true);
 
