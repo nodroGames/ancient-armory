@@ -1,12 +1,10 @@
 ﻿using UnityEngine;
+using System.Collections;
 
 namespace AncientArmory
 {
     public class ResearchController : MonoBehaviour
     {
-        [SerializeField]
-        private ResearchFacilityState researchFacilityState;
-
         [SerializeField]
         private Research[] tier1Research;
 
@@ -23,6 +21,9 @@ namespace AncientArmory
 
         [SerializeField]
         private GameObject researchIcon;
+
+        [SerializeField]
+        private GameObject researchCompleteWindow;
 
         [Header("---Timer---")]
         [SerializeField]
@@ -47,14 +48,13 @@ namespace AncientArmory
 
         private void Update()
         {
-
             PointUITowardsCamera();
         }
 
         private void OnEnable()
         {
             InitListeners();
-
+            
             StartGettingNewResearch();
         }
 
@@ -85,27 +85,14 @@ namespace AncientArmory
             ShowResearchIcon();
         }
 
-        private void StartGettingNewResearch()
-        {
-            researchFacilityState = ResearchFacilityState.WaitingForNextResearch;
-
-            researchIcon.SetActive(false);
-            newResearchPromptController.ToggleVisuals(false);
-
-            timerController.onTimerComplete.AddListener(OnNextResearchTime);
-            timerController.StartTimer(timeToGetNewResearch, "Gathering new research...");
-        }
-
         private void ShowResearchIcon()
         {
             researchIcon.SetActive(true);
-            researchFacilityState = ResearchFacilityState.WaitForPlayer;
         }
 
         private void ShowResearchPrompt()
         {
             newResearchPromptController.ToggleVisuals(true);
-            researchFacilityState = ResearchFacilityState.WaitForPlayer;
         }
 
         private static int SumRandomWeights(Research[] researchArray)
@@ -141,26 +128,60 @@ namespace AncientArmory
             return selectedResearch;
         }
 
+        private void StartGettingNewResearch()
+        {
+            //hide UI elements
+            researchIcon.SetActive(false);
+            newResearchPromptController.ToggleVisuals(false);
+            researchCompleteWindow.SetActive(false);
+
+            timerController.onTimerComplete.AddListener(OnNextResearchTime);
+            timerController.StartTimer(timeToGetNewResearch, "Gathering new Research...");//Gathering new research...
+        }
+
+        /// <summary>
+        /// Called by Button.
+        /// </summary>
         private void OnResearchAccepted()
         {
-            researchFacilityState = ResearchFacilityState.Researching;
+            Debug.Log("Research Accepted.");
             newResearchPromptController.ToggleVisuals(false);
             timerController.onTimerComplete.AddListener(OnResearchComplete);
             timerController.StartTimer(currentResearch.secondsToComplete, "Researching...");
             //deduct money
         }
 
+        /// <summary>
+        /// Called by Button.
+        /// </summary>
         private void OnResearchRejected()
         {
             Debug.Log("Rejected offer. No Deal, Howie");
-            newResearchPromptController.ToggleVisuals(false);
             StartGettingNewResearch();//get a different one
         }
 
+        /// <summary>
+        /// Called by Timer Event.
+        /// </summary>
         private void OnResearchComplete()
         {
-            Debug.Log("Research Complete!  That is all.");
+            Debug.Log("Research Complete! Increment up!");
             currentResearch.OnResearchComplete();
+            StartCoroutine(WaitAMoment());
+            //StartGettingNewResearch(); //recursion problem!!!!! 
+        }
+
+        /// <summary>
+        /// Show happy success image to player before restarting.
+        /// </summary>
+        /// <param name="moment"></param>
+        /// <returns></returns>
+        private IEnumerator WaitAMoment(float moment = 2)
+        {
+            researchCompleteWindow.SetActive(true);
+
+            yield return new WaitForSeconds(moment);
+            
             StartGettingNewResearch();
         }
 
