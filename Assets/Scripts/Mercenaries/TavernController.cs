@@ -6,7 +6,7 @@ using RpgDB;
 
 namespace AncientArmory
 {
-    public sealed class TavernController : MercenaryController
+    public sealed class TavernController : PoolController
     {
         public int MercsSpawned;
         public GameObject MercPrefab;

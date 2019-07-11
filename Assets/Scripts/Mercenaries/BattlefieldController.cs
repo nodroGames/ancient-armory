@@ -6,7 +6,7 @@ using RpgDB;
 
 namespace AncientArmory
 {
-    public sealed class BattlefieldController : MercenaryController
+    public sealed class BattlefieldController : PoolController
     {
         bool InitialLoadComplete;
         List<GameObject> MercPool;
@@ -54,7 +54,7 @@ namespace AncientArmory
 
         void OffenseMovement(GameObject characterObject)
         {
-
+            
         }
 
         void ResolveAttack(Character attacker, Character defender)
