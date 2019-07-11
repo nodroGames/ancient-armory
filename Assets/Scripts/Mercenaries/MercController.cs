@@ -27,7 +27,7 @@ namespace AncientArmory
 
         [Header("---UI---")]
         [SerializeField]
-        private HealthController healthController;
+        private HealthUIController healthController;
 
         //member Components
         private Animator myAnimator;
