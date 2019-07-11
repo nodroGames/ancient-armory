@@ -6,7 +6,7 @@ using RpgDB;
 
 namespace AncientArmory
 {
-    public abstract class MercenaryController : MonoBehaviour
+    public abstract class PoolController : MonoBehaviour
     {
         public GameDatabase GameDatabase;
         public GameObject Battlefield;
