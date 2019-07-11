@@ -12,35 +12,45 @@ namespace AncientArmory
         public GameObject MercPrefab;
         void Start(){
             setup();
-            spawnMerc(Battlefield.transform);
-            spawnMerc(Battlefield.transform);
+            InitiateRecruiting();
+        }
+
+        void InitiateRecruiting()
+        {
+            GameObject merc = spawnMerc();
         }
 
         // 
         //
         // Helper Functions
 
-        void spawnMerc(Transform location) {
+        GameObject spawnMerc() {
             GameObject newMerc;
+            Character merc;
             if (Tavern.transform.childCount == 0) // if pool is empty
             {
                 // instantiate prefab at spawn position
-                newMerc = Instantiate(MercPrefab, location);
-                GameDatabase.Classes.CreateCharacter(newMerc, "Soldier", ++MercsSpawned, GameDatabase.Extensions);
-                // attach character script
+                newMerc = Instantiate(MercPrefab, Tavern.transform);
+                // Create new character
+                merc = GameDatabase.Classes.CreateCharacter(newMerc, "Soldier", 1, GameDatabase.Extensions);
+                merc.Level = MercsSpawned;
             }
             else // if pool has mercs
             {
                 // Relocate to spawn position
                 newMerc = getPoolContents(Tavern)[0];
                 newMerc.SetActive(true);
-                newMerc.transform.parent = location.transform;
+                newMerc.transform.parent = Tavern.transform;
+                merc = newMerc.GetComponent<Character>();
+                // Set level of existing character
+                merc.Level = MercsSpawned;
             }
-            // Set merc level and increase MercsSpawned counter
-            Character merc = newMerc.GetComponent<Character>();
-            merc.Level = MercsSpawned;
-            // merc.Left_Hand = GameDatabase.Weapons.GetByName("Bow");
-            // TODO: assign stats based on the number of MercsSpawned
+            return newMerc;
+        }
+
+        void assignStats(Character merc)
+        {
+            
         }
     }
 }

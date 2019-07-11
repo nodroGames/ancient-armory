@@ -52,6 +52,11 @@ namespace AncientArmory
             }
         }
 
+        void OffenseMovement(GameObject characterObject)
+        {
+
+        }
+
         void ResolveAttack(Character attacker, Character defender)
         {
             int defender_health = defender.Hit_Points() - defender.Damage_Taken;
