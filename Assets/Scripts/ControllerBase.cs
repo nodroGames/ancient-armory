@@ -11,13 +11,11 @@ namespace AncientArmory
         protected static TavernController tavernControllerInstance;
         protected static ResearchController researchControllerInstance;
         protected static ArmoryController armoryControllerInstance;
+        protected static InfoPromptController infoPromptControllerInstance;
 
         [Header("---ControllerBase---")]
         [SerializeField]
         protected TimerController timerController;
-
-        [SerializeField]
-        protected InfoPromptController infoPromptController;
 
         [Header("---UI---")]
         [SerializeField]
@@ -81,6 +79,12 @@ namespace AncientArmory
                 if (searchObject) tavernControllerInstance = searchObject.GetComponent<TavernController>();//assign if it exists
             }
 
+            if (!infoPromptControllerInstance)//if it does not exist already
+            {
+                searchObject = GameObject.FindGameObjectWithTag("UIPromptController");//look for GO
+                if (searchObject) infoPromptControllerInstance = searchObject.GetComponent<InfoPromptController>();//assign if it exists
+            }
+
             //main camera
             if (!mainCameraTransform)//if it does not exist already
             {
@@ -96,8 +100,6 @@ namespace AncientArmory
 
         protected virtual void OnEnable()
         {
-            InitListeners();
-
             StartTimerCycle();
         }
 
@@ -105,8 +107,6 @@ namespace AncientArmory
         {
             //unsubscribe from events
             timerController.onTimerComplete.RemoveListener(OnCooldownComplete);
-            infoPromptController.acceptPrompt.RemoveListener(OnLeftButton);
-            infoPromptController.rejectPrompt.RemoveListener(OnRightButton);
         }
 
         protected virtual void PointUITowardsCamera()
@@ -114,16 +114,9 @@ namespace AncientArmory
             UIRoot.LookAt(mainCameraTransform.position);
         }
 
-        protected virtual void InitListeners()
-        {
-            //add listeners
-            infoPromptController.acceptPrompt.AddListener(OnLeftButton);
-            infoPromptController.rejectPrompt.AddListener(OnRightButton);
-        }
-
         protected virtual void OnCooldownComplete()
         {
-            Debug.Log("Click on the Leader!  Your thing is ready.", this);
+            Debug.Log("Click on the Leader!  " + this.name  + " thing is ready.", this);
             timerController.onTimerComplete.RemoveListener(OnCooldownComplete);
             ShowReadyIcon();
         }
@@ -135,14 +128,13 @@ namespace AncientArmory
 
         protected virtual void ShowInfoPrompt()
         {
-            infoPromptController.ToggleVisuals(true);
+            infoPromptControllerInstance.ShowInfoPrompt(this);
         }
 
         protected virtual void StartTimerCycle()
         {
             //hide UI elements
             readyIcon.SetActive(false);
-            infoPromptController.ToggleVisuals(false);
             completeWindow.SetActive(false);
 
             timerController.onTimerComplete.AddListener(OnCooldownComplete);
@@ -150,20 +142,24 @@ namespace AncientArmory
         }
 
         /// <summary>
-        /// Called by Button.
+        /// Called by Button. Starts new Timer Cycle.
         /// </summary>
-        protected virtual void OnLeftButton()
+        public virtual void OnLeftButton()
         {
             Debug.Log("Left Button Pressed.", this);
-            //do left thing
+            StartTimerCycle();//get a different one
+            readyIcon.SetActive(false);
+            //do the left thing
         }
 
         /// <summary>
-        /// Called by Button.
+        /// Called by Button. Starts new Timer Cycle.
         /// </summary>
-        protected virtual void OnRightButton()
+        public virtual void OnRightButton()
         {
             Debug.Log("Right Button Pressed.", this);
+            StartTimerCycle();//get a different one
+            readyIcon.SetActive(false);
             //do the right thing
         }
         
@@ -186,7 +182,7 @@ namespace AncientArmory
         /// </summary>
         public virtual void OnReadyIconPressed()
         {
-            readyIcon.SetActive(false);
+            //Debug.Log("Ready icon pressed!", this);
             ShowInfoPrompt();
         }
     }
