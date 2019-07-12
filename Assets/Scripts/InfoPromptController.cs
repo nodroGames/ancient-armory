@@ -8,7 +8,23 @@ namespace AncientArmory
 {
     public class InfoPromptController : MonoBehaviour
     {
-        [Header("---UI Elements---")]
+        [SerializeField]
+        private GameObject UIRoot;
+
+        [Header("---Leader UI Elements---")]
+        [SerializeField]
+        private GameObject recruiterUIElement;
+
+        [SerializeField]
+        private GameObject commanderUIElement;
+
+        [SerializeField]
+        private GameObject quartermasterUIElement;
+
+        [SerializeField]
+        private GameObject breakthroughUIElement;
+
+        [Header("---Money UI Elements---")]
         [SerializeField]
         private TextMeshProUGUI infoText;
 
@@ -16,36 +32,82 @@ namespace AncientArmory
         private TextMeshProUGUI costText;
 
         [SerializeField]
-        private TextMeshProUGUI windowTitleText;
+        private TextMeshProUGUI availableFundsText;
 
-        [SerializeField]
-        private Image backgroundImage;
-
-        //events
-        [HideInInspector]
-        public UnityEvent acceptPrompt;
-
-        [HideInInspector]
-        public UnityEvent rejectPrompt;
+        private readonly ControllerBase[] controllerBaseList = new ControllerBase[4];//4 controllers
 
         private void Start()
         {
-            InitEvents();
+            ToggleVisuals(false);//start with everything hidden
         }
 
-        private void InitEvents()
+        /// <summary>
+        /// Register a controller with this Class for callbacks.
+        /// </summary>
+        /// <param name="newControllerBase"></param>
+        public void RegisterController(ControllerBase newControllerBase)
         {
-            if (acceptPrompt == null)
+            for(var i = 0; i < controllerBaseList.Length; ++i)
             {
-                acceptPrompt = new UnityEvent();
+                if(controllerBaseList[i] == null)
+                {
+                    controllerBaseList[i] = newControllerBase;
+                    return;
+                }
             }
-
-            if (rejectPrompt == null)
-            {
-                rejectPrompt = new UnityEvent();
-            }
+            Debug.LogError("ERROR! More Controllers being registered than expected. more than 4??", this);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="requestingController"></param>
+        /// <param name="infoString"></param>
+        /// <param name="costString"></param>
+        public void ShowInfoPrompt(ControllerBase requestingController, string infoString = "", string costString = "")
+        {
+            if(requestingController is ArmoryController)
+            {
+                SetActiveWindow(quartermasterUIElement);
+                costText.gameObject.SetActive(true);
+                availableFundsText.gameObject.SetActive(true);
+            }
+
+            else if (requestingController is BattlefieldController)
+            {
+                SetActiveWindow(commanderUIElement);
+                costText.gameObject.SetActive(false);
+                availableFundsText.gameObject.SetActive(false);
+            }
+
+            else if (requestingController is ResearchController)
+            {
+                SetActiveWindow(breakthroughUIElement);
+                costText.gameObject.SetActive(true);
+                availableFundsText.gameObject.SetActive(true);
+            }
+
+            else if (requestingController is TavernController)
+            {
+                SetActiveWindow(recruiterUIElement);
+                costText.gameObject.SetActive(true);
+                availableFundsText.gameObject.SetActive(true);
+            }
+
+            else
+            {
+                //default
+                SetActiveWindow(recruiterUIElement);//place holder for default
+                costText.gameObject.SetActive(true);//place holder for default
+                availableFundsText.gameObject.SetActive(true);//place holder for default
+                Debug.Log("Generic info prompt. Do something generic.  YOLO!", requestingController);
+            }
+
+            //show description
+            infoText.text = infoString;
+            costText.text = costString;
+        }
+        
         /// <summary>
         /// Load UI with data from SO.
         /// </summary>
@@ -54,7 +116,6 @@ namespace AncientArmory
         {
             infoText.text = researchSO.description;
             costText.text = researchSO.goldCost.ToString();
-            windowTitleText.text = researchSO.researchName.ToString();
         }
 
         /// <summary>
@@ -66,7 +127,6 @@ namespace AncientArmory
             Debug.Log("LOAD INFO NOT YET IMPLEMENTED!");
             infoText.text = "this is a merc.";
             costText.text = "$99998";
-            windowTitleText.text = "MISSINGNO.";
         }
 
         /// <summary>
@@ -78,28 +138,36 @@ namespace AncientArmory
             Debug.Log("LOAD INFO NOT YET IMPLEMENTED!");
             infoText.text = "this is an item.";
             costText.text = "$99999";
-            windowTitleText.text = "MISSINGNO.";
         }
-
+                
         /// <summary>
-        /// Called by Button.
+        /// Disable all windows except for this one.
         /// </summary>
-        public void LeftButton()
+        /// <param name="desiredWindow"></param>
+        public void SetActiveWindow(GameObject desiredWindow)
         {
-            acceptPrompt.Invoke();
-        }
+            UIRoot.SetActive(true);//show background
 
-        /// <summary>
-        /// Called by Button.
-        /// </summary>
-        public void RightButton()
-        {
-            rejectPrompt.Invoke();
+            //disable all
+            recruiterUIElement.SetActive(false);
+            commanderUIElement.SetActive(false);
+            quartermasterUIElement.SetActive(false);
+            breakthroughUIElement.SetActive(false);
+
+            desiredWindow.SetActive(true);
         }
 
         public void ToggleVisuals(bool active)
         {
-            this.gameObject.SetActive(active);
+            UIRoot.SetActive(active);//toggle all at once
+        }
+
+        /// <summary>
+        /// Hide all visuals for this object
+        /// </summary>
+        public void CloseDialogue()
+        {
+            ToggleVisuals(false);
         }
     }
 }
