@@ -13,6 +13,7 @@ namespace AncientArmory
         public int randomWeight = 100;
         public int tier = 0;
         public int playerExperienceGained = 10;
+        [TextArea]
         public string description = "Increase by 10%";
 
         public virtual void OnResearchComplete()
