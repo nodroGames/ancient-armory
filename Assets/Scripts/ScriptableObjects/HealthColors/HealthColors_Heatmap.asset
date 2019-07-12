@@ -15,5 +15,5 @@ MonoBehaviour:
   color_HealthHigh: {r: 0, g: 0.35994577, b: 1, a: 1}
   color_HealthLow: {r: 1, g: 0, b: 0.6164799, a: 1}
   color_HealthDanger: {r: 1, g: 0.1305919, b: 0, a: 1}
-  limit_HealthLow: 0.25
-  limit_HealthDanger: 0.1
+  limit_HealthLow: 0.5
+  limit_HealthDanger: 0.2

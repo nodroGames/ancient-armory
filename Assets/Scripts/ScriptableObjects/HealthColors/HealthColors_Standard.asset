@@ -13,9 +13,7 @@ MonoBehaviour:
   m_Name: HealthColors_Standard
   m_EditorClassIdentifier: 
   color_HealthHigh: {r: 0.015129928, g: 0.8018868, b: 0.18797655, a: 1}
-  color_HealthHalf: {r: 0.7793758, g: 1, b: 0, a: 1}
   color_HealthLow: {r: 1, g: 0.7427106, b: 0, a: 1}
   color_HealthDanger: {r: 1, g: 0, b: 0.24087381, a: 1}
-  limit_HealthHalf: 0.5
-  limit_HealthLow: 0.25
-  limit_HealthDanger: 0.1
+  limit_HealthLow: 0.5
+  limit_HealthDanger: 0.2
