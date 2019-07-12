@@ -137,7 +137,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timerController: {fileID: 7100336189582619224}
-  infoPromptController: {fileID: 7693933944616317669}
   UIRoot: {fileID: 262592438472335220}
   readyIcon: {fileID: 3719618502271575132}
   completeWindow: {fileID: 5215731011757067225}
@@ -148,6 +147,10 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 96375487853ebe449afbff3159e2f10d, type: 2}
   - {fileID: 11400000, guid: 3f651cda0fe7ea741b227727e9e086ed, type: 2}
   - {fileID: 11400000, guid: 09512f6f5bc9bb546be836154be3e04f, type: 2}
+  - {fileID: 11400000, guid: df4705571b37f8e4fa68cd4a09539d7f, type: 2}
+  - {fileID: 11400000, guid: 8258d8419ed6ec8419496226c3e4dfc2, type: 2}
+  - {fileID: 11400000, guid: a8be978a3ac649642a2bd45e9413c952, type: 2}
+  - {fileID: 11400000, guid: f6f717b0e8fbf3b409a672822b2c8dc1, type: 2}
 --- !u!1 &262592438294325394
 GameObject:
   m_ObjectHideFlags: 0
@@ -645,11 +648,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 262592438294325395}
     m_Modifications:
-    - target: {fileID: 7396069113695894269, guid: f2931e93f493d6746b885d966a8a5922,
-        type: 3}
-      propertyPath: m_Name
-      value: Ready Icon
-      objectReference: {fileID: 0}
     - target: {fileID: 7485686479054058766, guid: f2931e93f493d6746b885d966a8a5922,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -755,6 +753,11 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 7396069113695894269, guid: f2931e93f493d6746b885d966a8a5922,
+        type: 3}
+      propertyPath: m_Name
+      value: Ready Icon
+      objectReference: {fileID: 0}
     - target: {fileID: 2433494548858761382, guid: f2931e93f493d6746b885d966a8a5922,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -781,16 +784,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 262592438294325395}
     m_Modifications:
-    - target: {fileID: 9006419914860132947, guid: f086f915f5b75a7458da682f936927bd,
-        type: 3}
-      propertyPath: m_Name
-      value: Info Prompt
-      objectReference: {fileID: 0}
-    - target: {fileID: 9006419914860132947, guid: f086f915f5b75a7458da682f936927bd,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 9006419914860132944, guid: f086f915f5b75a7458da682f936927bd,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -906,6 +899,16 @@ PrefabInstance:
       propertyPath: m_LocalScale.y
       value: 0.025
       objectReference: {fileID: 0}
+    - target: {fileID: 9006419914860132947, guid: f086f915f5b75a7458da682f936927bd,
+        type: 3}
+      propertyPath: m_Name
+      value: Info Prompt
+      objectReference: {fileID: 0}
+    - target: {fileID: 9006419914860132947, guid: f086f915f5b75a7458da682f936927bd,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 9006419915248529527, guid: f086f915f5b75a7458da682f936927bd,
         type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -999,15 +1002,3 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 8980608285795279675}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &7693933944616317669 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1614504797177450974, guid: f086f915f5b75a7458da682f936927bd,
-    type: 3}
-  m_PrefabInstance: {fileID: 8980608285795279675}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a9c306d65a2112b4fac8c378b9cbca0f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
