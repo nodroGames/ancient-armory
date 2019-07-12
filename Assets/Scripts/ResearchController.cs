@@ -14,6 +14,7 @@ namespace AncientArmory
         protected override void Start()
         {
             base.Start();
+            currentResearch = GetRandomResearch(researchArray);
         }
 
         protected override void OnDisable()
@@ -22,19 +23,31 @@ namespace AncientArmory
             timerController.onTimerComplete.RemoveListener(OnResearchComplete);
         }
 
-        protected override void OnLeftButton()//accept
+        protected override void ShowInfoPrompt()
         {
-            base.OnLeftButton();//remove to disable debug
-
-            infoPromptController.ToggleVisuals(false);
-            timerController.onTimerComplete.AddListener(OnResearchComplete);
-            timerController.StartTimer(currentResearch.secondsToComplete, inProcessMessage);//start researching thing
+            infoPromptControllerInstance.ShowInfoPrompt(this, currentResearch.description, currentResearch.goldCost.ToString());
         }
 
-        protected override void OnRightButton()//reject
+        /// <summary>
+        /// Called by Button.
+        /// </summary>
+        public override void OnReadyIconPressed()
         {
-            base.OnRightButton();// remove to disable debug
-            StartTimerCycle();//get a different one
+            base.OnReadyIconPressed();
+            currentResearch = GetRandomResearch(researchArray);
+            infoPromptControllerInstance.LoadInfo(currentResearch);
+        }
+
+        /// <summary>
+        /// Begin working on Research.  
+        /// </summary>
+        public override void OnRightButton()//accept
+        {
+            Debug.Log("Research Accepted!", this);
+            timerController.onTimerComplete.AddListener(OnResearchComplete);
+            timerController.StartTimer(currentResearch.secondsToComplete, inProcessMessage);//start researching thing
+            readyIcon.SetActive(false);
+            //deduct money
         }
 
         private static int SumRandomWeights(Research[] researchArray)
@@ -75,21 +88,11 @@ namespace AncientArmory
         /// </summary>
         private void OnResearchComplete()
         {
-            Debug.Log("Research Complete! Increment up!");
+            Debug.Log("Research Complete! Increment up!", this);
             currentResearch.OnResearchComplete();
             timerController.onTimerComplete.RemoveListener(OnResearchComplete);
             StartCoroutine(ShowCompleteWindow());//show message to player
             //TimerCycle();//or do so immediately
-        }
-
-        /// <summary>
-        /// Called by Button.
-        /// </summary>
-        public override void OnReadyIconPressed()
-        {
-            base.OnReadyIconPressed();
-            currentResearch = GetRandomResearch(researchArray);
-            infoPromptController.LoadInfo(currentResearch);
         }
     }
 }
