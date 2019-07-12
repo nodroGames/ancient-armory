@@ -3,7 +3,7 @@
 
 namespace AncientArmory
 {
-    //[CreateAssetMenu(fileName = "Research_", menuName = "ScriptableObjects/Research")]
+    [CreateAssetMenu(fileName = "Research_Generic_", menuName = "ScriptableObjects/Generic Research")]
     public class Research : ScriptableObject
     {
         [Header("---Research Base---")]
