@@ -5,28 +5,72 @@ using RpgDB;
 
 namespace AncientArmory
 {
-    public sealed class TavernController : PoolController
+    public sealed class TavernController : ControllerBase
     {
+        // Required game objects:
+        // readyIcon
+        // infoPromptControllerInstance
+
         public int MercsSpawned;
         public GameObject MercPrefab;
 
         void Start()
         {
             base.Start();
-            setup();
-            InitiateRecruiting();
+            cooldownDelay = 10;
+            cooldownMessage = "cooldownMessage";
+            StartTimerCycle();
         }
 
-        void InitiateRecruiting()
+
+        /// <summary>
+        /// Called by Button.
+        /// </summary>
+        public override void OnReadyIconPressed()
         {
-            GameObject merc = spawnMerc();
+            base.OnReadyIconPressed();
+            GameObject merc = SpawnMerc();
+            merc.GetComponent<Character>();
+            infoPromptControllerInstance.LoadInfo("lookie, merc details");
         }
 
-        // 
-        //
-        // Helper Functions
+        /// <summary>
+        /// Called by Button.
+        /// </summary>
+        public override void OnRightButton()//accept
+        {
+            Debug.Log("Send to Armory!", this);
+            timerController.onTimerComplete.AddListener(OnRecruitingComplete);
+            timerController.StartTimer(currentResearch.secondsToComplete, inProcessMessage);//start researching thing
+            readyIcon.SetActive(false);
+            //deduct money
+        }
 
-        GameObject spawnMerc()
+
+        /// <summary>
+        /// Called by Button.
+        /// </summary>
+        public virtual void OnLeftButton()
+        {
+            Debug.Log("Send to Battlefield!", this);
+            StartTimerCycle();//get a different one
+            readyIcon.SetActive(false);
+            //do the left thing
+        }
+
+        /// <summary>
+        /// Called by Timer Event.
+        /// </summary>
+        private void OnRecruitingComplete()
+        {
+            Debug.Log("Research Complete! Increment up!", this);
+            currentResearch.OnResearchComplete();
+            timerController.onTimerComplete.RemoveListener(OnResearchComplete);
+            StartCoroutine(ShowCompleteWindow());//show message to player
+            //TimerCycle();//or do so immediately
+        }
+
+        GameObject SpawnMerc()
         {
             GameObject newMerc;
             Character merc;
