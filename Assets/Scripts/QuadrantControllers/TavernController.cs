@@ -10,7 +10,7 @@ namespace AncientArmory
         // Required game objects:
         // readyIcon
         // infoPromptControllerInstance
-
+        [Header("---TavernController---")]
         public int MercsSpawned;
         public GameObject MercPrefab;
         List<GameObject> DeadPool;

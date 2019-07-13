@@ -44,24 +44,20 @@ namespace AncientArmory
         /// </summary>
         protected static void GatherStaticReferences()
         {
-            // Long individual lines here to reduce total length of function
-            if (!armoryControllerInstance)//if it does not exist already
+            if (!armoryControllerInstance)//if has not been found and assigned already
                 armoryControllerInstance = GameObject.FindGameObjectWithTag("ArmoryController").GetComponent<ArmoryController>();
 
-            if (!battlefieldControllerInstance)//if it does not exist already
+            if (!battlefieldControllerInstance)//if has not been found and assigned already
                 battlefieldControllerInstance = GameObject.FindGameObjectWithTag("BattlefieldController").GetComponent<BattlefieldController>();
 
-            if (!researchControllerInstance)//if it does not exist already
+            if (!researchControllerInstance)//if has not been found and assigned already
                 researchControllerInstance = GameObject.FindGameObjectWithTag("ResearchController").GetComponent<ResearchController>();
 
-            if (!tavernControllerInstance)//if it does not exist already
+            if (!tavernControllerInstance)//if has not been found and assigned already
                 tavernControllerInstance = GameObject.FindGameObjectWithTag("TavernController").GetComponent<TavernController>();
 
-            if (!infoPromptControllerInstance)//if it does not exist already
+            if (!infoPromptControllerInstance)//if has not been found and assigned already
                 infoPromptControllerInstance = GameObject.FindGameObjectWithTag("UIPromptController").GetComponent<InfoPromptController>();
-
-            if (!mainCameraTransform)//if it does not exist already
-                mainCameraTransform = GameObject.FindGameObjectWithTag("MainCamera").transform;//assign if it exists
         }
 
         protected virtual void Start()

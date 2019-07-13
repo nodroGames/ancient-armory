@@ -8,6 +8,7 @@ namespace AncientArmory
 {
     public sealed class BattlefieldController : ControllerBase
     {
+        [Header("---Battlefield Controller---")]
         public List<GameObject> WaitingLine;
         List<GameObject> FrontLine;
         List<GameObject> MiddleLine;
