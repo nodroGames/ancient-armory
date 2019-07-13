@@ -42,8 +42,8 @@ namespace AncientArmory
         {
             base.OnReadyIconPressed();
             newMerc = SpawnMerc();
-            newMerc.GetComponent<Character>();
-            infoPromptControllerInstance.LoadInfo("lookie, merc details");
+            newMerc.GetComponent<MercController>();
+            infoPromptControllerInstance.LoadInfo();
         }
 
         /// <summary>
@@ -55,6 +55,7 @@ namespace AncientArmory
             SendToArmory();
             readyIcon.SetActive(false);
             // deduct money
+            StartTimerCycle(); // Start again
         }
 
 
@@ -65,9 +66,9 @@ namespace AncientArmory
         {
             Debug.Log("Send to Battlefield!", this);
             SendToBattlefield();
-            StartTimerCycle();//get a different one
             readyIcon.SetActive(false);
             // deduct money
+            StartTimerCycle(); // Start again
         }
 
         /// <summary>
@@ -93,33 +94,45 @@ namespace AncientArmory
             newMerc.transform.parent = Battlefield.transform;
         }
 
+        /// <summary>
+        /// Must be called before any other function that uses newMerc.
+        /// </summary>
         GameObject SpawnMerc()
         {
-            GameObject newMerc;
             if (Tavern.transform.childCount == 0) // if pool is empty
             {
-                // instantiate prefab at spawn position
+                // Create a new instance of MercPrefab TODO: get exact start location
                 newMerc = Instantiate(MercPrefab, Tavern.transform);
-                // Create new character
+                // Create new character mono & attach it to newMerc
                 Character mercCharacter = GameDatabase.Classes.CreateCharacter(newMerc, "Soldier", 1, GameDatabase.Extensions);
+                // New merc level is equal to the number of mercs spawned
                 mercCharacter.Level = ++MercsSpawned;
+
+                attachMercController();
                 assignStats(mercCharacter);
             }
             else // if pool has mercs
             {
-                // Relocate to spawn position
+                // Dead mercs are pooled in the DeadPool. Grab one to use.
                 newMerc = DeadPool[0];
+                // Make the invisible dead visible
                 newMerc.SetActive(true);
+                // Move to Tavern position. TODO: get exact start location
                 newMerc.transform.parent = Tavern.transform;
+                // Get existing Character component
                 Character mercCharacter = newMerc.GetComponent<Character>();
-                // Set level of existing character
+                // New merc level is equal to the number of mercs spawned
                 mercCharacter.Level = ++MercsSpawned;
                 assignStats(mercCharacter);
             }
-            return newMerc;
         }
 
-        void assignStats(Character merc)
+        void attachMercController()
+        {
+            
+        }
+
+        void assignStats()
         {
             
         }
