@@ -36,6 +36,7 @@ namespace AncientArmory
         // Start is called before the first frame update
         void Start()
         {
+            maxHealth = gameObject.GetComponent<RpgDB.Character>.Hit_Points();
             currentHealth = maxHealth;
             GatherReferences();
 
