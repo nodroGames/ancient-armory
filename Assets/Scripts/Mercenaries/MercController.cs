@@ -36,7 +36,6 @@ namespace AncientArmory
         public void Start()
         {
             GatherReferences();
-            SetHealth();
         }
 
         // Update is called once per frame
