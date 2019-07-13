@@ -5,8 +5,6 @@ namespace AncientArmory
 {
     public class ControllerBase : MonoBehaviour
     {
-        //shared Class references
-        protected static Transform mainCameraTransform;
         protected static BattlefieldController battlefieldControllerInstance;
         protected static TavernController tavernControllerInstance;
         protected static ResearchController researchControllerInstance;
@@ -18,8 +16,6 @@ namespace AncientArmory
         protected TimerController timerController;
 
         [Header("---UI---")]
-        [SerializeField]
-        protected Transform UIRoot;
 
         [SerializeField]
         protected GameObject readyIcon;
@@ -40,11 +36,6 @@ namespace AncientArmory
         protected virtual void Awake()
         {
             GatherStaticReferences();
-        }
-        
-        protected virtual void Start()
-        {
-            PointUITowardsCamera();
         }
 
         /// <summary>
@@ -84,18 +75,11 @@ namespace AncientArmory
                 searchObject = GameObject.FindGameObjectWithTag("UIPromptController");//look for GO
                 if (searchObject) infoPromptControllerInstance = searchObject.GetComponent<InfoPromptController>();//assign if it exists
             }
-
-            //main camera
-            if (!mainCameraTransform)//if it does not exist already
-            {
-                searchObject = GameObject.FindGameObjectWithTag("MainCamera");//look for GO
-                if (searchObject) mainCameraTransform = searchObject.transform;//assign if it exists
-            }
         }
 
-        protected virtual void Update()
+        protected virtual void Start()
         {
-            PointUITowardsCamera();//if object is static, remove this.
+            
         }
 
         protected virtual void OnEnable()
@@ -107,11 +91,6 @@ namespace AncientArmory
         {
             //unsubscribe from events
             timerController.onTimerComplete.RemoveListener(OnCooldownComplete);
-        }
-
-        protected virtual void PointUITowardsCamera()
-        {
-            UIRoot.LookAt(mainCameraTransform.position);
         }
 
         protected virtual void OnCooldownComplete()

@@ -13,7 +13,6 @@ namespace AncientArmory
 
         protected override void Start()
         {
-            base.Start();
             currentResearch = GetRandomResearch(researchArray);
         }
 
