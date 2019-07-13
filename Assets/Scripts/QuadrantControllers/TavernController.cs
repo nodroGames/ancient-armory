@@ -16,6 +16,8 @@ namespace AncientArmory
         List<GameObject> DeadPool;
         GameObject Armory;
         GameObject Tavern;
+        GameObject Battlefield;
+        GameDatabase GameDatabase;
 
         GameObject newMerc;
 
@@ -27,7 +29,7 @@ namespace AncientArmory
             Armory = GameObject.FindGameObjectWithTag("ArmoryController");
             Battlefield = GameObject.FindGameObjectWithTag("BattlefieldController");
             Tavern = GameObject.FindGameObjectWithTag("TavernController");
-
+            GameDatabase = GameObject.FindGameObjectWithTag("GameDatabase").GetComponent<GameDatabase>();
             StartTimerCycle();
         }
 
@@ -74,8 +76,7 @@ namespace AncientArmory
         private void OnRecruitingComplete()
         {
             Debug.Log("Recruiting Complete! Increment up!", this);
-            currentResearch.OnResearchComplete();
-            timerController.onTimerComplete.RemoveListener(OnResearchComplete);
+            timerController.onTimerComplete.RemoveListener(OnRecruitingComplete);
             StartCoroutine(ShowCompleteWindow());//show message to player
             //TimerCycle();//or do so immediately
         }
@@ -94,15 +95,15 @@ namespace AncientArmory
 
         GameObject SpawnMerc()
         {
-            Character merc;
+            GameObject newMerc;
             if (Tavern.transform.childCount == 0) // if pool is empty
             {
                 // instantiate prefab at spawn position
                 newMerc = Instantiate(MercPrefab, Tavern.transform);
                 // Create new character
-                mercCharacter = GameDatabase.Classes.CreateCharacter(newMerc, "Soldier", 1, GameDatabase.Extensions);
+                Character mercCharacter = GameDatabase.Classes.CreateCharacter(newMerc, "Soldier", 1, GameDatabase.Extensions);
                 mercCharacter.Level = ++MercsSpawned;
-                assignStats(merc);
+                assignStats(mercCharacter);
             }
             else // if pool has mercs
             {
@@ -110,7 +111,7 @@ namespace AncientArmory
                 newMerc = DeadPool[0];
                 newMerc.SetActive(true);
                 newMerc.transform.parent = Tavern.transform;
-                mercCharacter = newMerc.GetComponent<Character>();
+                Character mercCharacter = newMerc.GetComponent<Character>();
                 // Set level of existing character
                 mercCharacter.Level = ++MercsSpawned;
                 assignStats(mercCharacter);

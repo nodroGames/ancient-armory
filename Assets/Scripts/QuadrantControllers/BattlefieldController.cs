@@ -8,8 +8,7 @@ namespace AncientArmory
 {
     public sealed class BattlefieldController : ControllerBase
     {
-        bool InitialLoadComplete;
-        List<GameObject> WaitingLine;
+        public List<GameObject> WaitingLine;
         List<GameObject> FrontLine;
         List<GameObject> MiddleLine;
         List<GameObject> BackLine;
@@ -28,28 +27,28 @@ namespace AncientArmory
 
         void Update()
         {
-            if (Battlefield.transform.childCount != 0)
-            {
-                if (!InitialLoadComplete && Time.time > twoSecondsFromNow)
-                {
-                    merc_1 = getPoolContents(Battlefield)[0].GetComponent<Character>();
-                    merc_2 = getPoolContents(Battlefield)[1].GetComponent<Character>();
-                    merc_1.Right_Hand = GameDatabase.Weapons.GetByName("Bow");
-                    merc_2.Right_Hand = GameDatabase.Weapons.GetByName("Longsword");
-                    merc_1.Armor = GameDatabase.Armor.GetByName("Ceremonial plate, troop");
-                    InitialLoadComplete = true;
-                    twoSecondsFromNow = Time.time + 2;
-                }
-                if (Time.time > twoSecondsFromNow)
-                {
-                    merc_1 = merc_1 ?? getPoolContents(Battlefield)[0].GetComponent<Character>();
-                    merc_2 = merc_2 ?? getPoolContents(Battlefield)[1].GetComponent<Character>();
-                    if(merc_1.Hit_Points() > merc_2.Damage_Taken)
-                        ResolveAttack(merc_1, merc_2);
-                    if(merc_2.Hit_Points() > merc_2.Damage_Taken)
-                        ResolveAttack(merc_2, merc_1);
-                }
-            }
+            // if (Battlefield.transform.childCount != 0)
+            // {
+            //     if (!InitialLoadComplete && Time.time > twoSecondsFromNow)
+            //     {
+            //         merc_1 = getPoolContents(Battlefield)[0].GetComponent<Character>();
+            //         merc_2 = getPoolContents(Battlefield)[1].GetComponent<Character>();
+            //         merc_1.Right_Hand = GameDatabase.Weapons.GetByName("Bow");
+            //         merc_2.Right_Hand = GameDatabase.Weapons.GetByName("Longsword");
+            //         merc_1.Armor = GameDatabase.Armor.GetByName("Ceremonial plate, troop");
+            //         InitialLoadComplete = true;
+            //         twoSecondsFromNow = Time.time + 2;
+            //     }
+            //     if (Time.time > twoSecondsFromNow)
+            //     {
+            //         merc_1 = merc_1 ?? getPoolContents(Battlefield)[0].GetComponent<Character>();
+            //         merc_2 = merc_2 ?? getPoolContents(Battlefield)[1].GetComponent<Character>();
+            //         if(merc_1.Hit_Points() > merc_2.Damage_Taken)
+            //             ResolveAttack(merc_1, merc_2);
+            //         if(merc_2.Hit_Points() > merc_2.Damage_Taken)
+            //             ResolveAttack(merc_2, merc_1);
+            //     }
+            // }
         }
 
         void SetDefender(GameObject merc, string position)
@@ -86,14 +85,14 @@ namespace AncientArmory
         //
         // Helper Functions
 
-        void setDefenderInList(GameObject merc, List<GameObject> correctList, List<GameObject> alternateList)
+        void setDefenderInList(GameObject merc, List<GameObject> desiredList, List<GameObject> alternateList)
         {
-            if (list.Count > 6)
-                list.Insert(merc);
+            if (desiredList.Count > 6)
+                desiredList.Add(merc);
             else if (MiddleLine.Count > 6)
-                MiddleLine.Insert(merc);
+                MiddleLine.Add(merc);
             else if (alternateList.Count > 6)
-                alternateList.Insert(merc);
+                alternateList.Add(merc);
         }
 
         int resolveSingleOrDualWeildAttack(Character attacker, int defense)

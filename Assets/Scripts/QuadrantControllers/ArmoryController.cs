@@ -9,7 +9,7 @@ namespace AncientArmory
         [Header("---Armory Controller---")]
         [SerializeField]
         private MercController[] mercArray;
-        private List<GameObject> Scavengers;
+        public List<GameObject> Scavengers;
     }
 
 }

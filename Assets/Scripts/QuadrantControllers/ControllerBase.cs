@@ -10,6 +10,7 @@ namespace AncientArmory
         protected static ResearchController researchControllerInstance;
         protected static ArmoryController armoryControllerInstance;
         protected static InfoPromptController infoPromptControllerInstance;
+        protected static Transform mainCameraTransform;
 
         [Header("---ControllerBase---")]
         [SerializeField]
@@ -51,7 +52,7 @@ namespace AncientArmory
                 battlefieldControllerInstance = GameObject.FindGameObjectWithTag("BattlefieldController").GetComponent<BattlefieldController>();
 
             if (!researchControllerInstance)//if it does not exist already
-                researchControllerInstanceject = GameObject.FindGameObjectWithTag("ResearchController").GetComponent<ResearchController>();
+                researchControllerInstance = GameObject.FindGameObjectWithTag("ResearchController").GetComponent<ResearchController>();
 
             if (!tavernControllerInstance)//if it does not exist already
                 tavernControllerInstance = GameObject.FindGameObjectWithTag("TavernController").GetComponent<TavernController>();
@@ -59,9 +60,8 @@ namespace AncientArmory
             if (!infoPromptControllerInstance)//if it does not exist already
                 infoPromptControllerInstance = GameObject.FindGameObjectWithTag("UIPromptController").GetComponent<InfoPromptController>();
 
-            //main camera
             if (!mainCameraTransform)//if it does not exist already
-                mainCameraTransform.FindGameObjectWithTag("MainCamera").transform;//assign if it exists
+                mainCameraTransform = GameObject.FindGameObjectWithTag("MainCamera").transform;//assign if it exists
         }
 
         protected virtual void Start()
