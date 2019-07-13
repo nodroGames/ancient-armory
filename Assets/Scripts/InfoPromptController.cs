@@ -148,11 +148,7 @@ namespace AncientArmory
         {
             UIRoot.SetActive(true);//show background
 
-            //disable all
-            recruiterUIElement.SetActive(false);
-            commanderUIElement.SetActive(false);
-            quartermasterUIElement.SetActive(false);
-            researchUIElement.SetActive(false);
+            DisableAllPrompts();
 
             desiredWindow.SetActive(true);
         }
@@ -168,6 +164,14 @@ namespace AncientArmory
         public void CloseDialogue()
         {
             ToggleVisuals(false);
+        }
+
+        void DisableAllPrompts()
+        {
+            recruiterUIElement.SetActive(false);
+            commanderUIElement.SetActive(false);
+            quartermasterUIElement.SetActive(false);
+            researchUIElement.SetActive(false);
         }
     }
 }
