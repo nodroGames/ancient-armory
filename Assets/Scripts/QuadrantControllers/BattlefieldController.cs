@@ -6,17 +6,16 @@ using RpgDB;
 
 namespace AncientArmory
 {
-    public sealed class BattlefieldController : PoolController
+    public sealed class BattlefieldController : ControllerBase
     {
         bool InitialLoadComplete;
-        List<GameObject> MercPool;
+        List<GameObject> FrontLine;
+        List<GameObject> MiddleLine;
+        List<GameObject> BackLine;
+
         float twoSecondsFromNow;
         float fiveSecondsFromNow;
         float tenSecondsFromNow;
-
-
-        Character merc_1;
-        Character merc_2;
 
         void Start()
         {
@@ -52,6 +51,18 @@ namespace AncientArmory
             }
         }
 
+        void SetDefender(GameObject merc, string position)
+        {
+            switch (position) {
+                case "melee":
+                    setDefenderInList(merc, FrontLine, BackLine);
+                    break;
+                case "ranged":
+                    setDefenderInList(merc, BackLine, FrontLine);
+                    break;
+            }
+        }
+
         void OffenseMovement(GameObject characterObject)
         {
             
@@ -73,6 +84,16 @@ namespace AncientArmory
         // 
         //
         // Helper Functions
+
+        void setDefenderInList(GameObject merc, List<GameObject> correctList, List<GameObject> alternateList)
+        {
+            if (list.Count > 6)
+                list.Insert(merc);
+            else if (MiddleLine.Count > 6)
+                MiddleLine.Insert(merc);
+            else if (alternateList.Count > 6)
+                alternateList.Insert(merc);
+        }
 
         int resolveSingleOrDualWeildAttack(Character attacker, int defense)
         {
