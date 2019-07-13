@@ -21,19 +21,23 @@ namespace AncientArmory
 
         GameObject newMerc;
 
-        void Start()
+        override void Start()
         {
             base.Start();
+            AddStaticReferences();
             cooldownDelay = 10;
             cooldownMessage = "cooldownMessage";
+            StartTimerCycle();
+        }
+
+        void AddStaticReferences()
+        {
+            base.GatherStaticReferences();
             Armory = GameObject.FindGameObjectWithTag("ArmoryController");
             Battlefield = GameObject.FindGameObjectWithTag("BattlefieldController");
             Tavern = GameObject.FindGameObjectWithTag("TavernController");
             GameDatabase = GameObject.FindGameObjectWithTag("GameDatabase").GetComponent<GameDatabase>();
-            StartTimerCycle();
         }
-
-
 
         /// <summary>
         /// Called by Button.
@@ -41,9 +45,8 @@ namespace AncientArmory
         public override void OnReadyIconPressed()
         {
             base.OnReadyIconPressed();
-            newMerc = SpawnMerc();
-            newMerc.GetComponent<MercController>();
-            infoPromptControllerInstance.LoadInfo();
+            SpawnMerc();
+            infoPromptControllerInstance.LoadInfo(newMerc.GetComponent<MercController>());
         }
 
         /// <summary>
