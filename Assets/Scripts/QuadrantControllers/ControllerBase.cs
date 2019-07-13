@@ -43,38 +43,25 @@ namespace AncientArmory
         /// </summary>
         protected static void GatherStaticReferences()
         {
-            GameObject searchObject;//resue a single allocation of memory
-
-            //controllers
+            // Long individual lines here to reduce total length of function
             if (!armoryControllerInstance)//if it does not exist already
-            {
-                searchObject = GameObject.FindGameObjectWithTag("ArmoryController");//look for GO
-                if(searchObject) armoryControllerInstance = searchObject.GetComponent<ArmoryController>();//assign if it exists
-            }
+                armoryControllerInstance = GameObject.FindGameObjectWithTag("ArmoryController").GetComponent<ArmoryController>();
 
             if (!battlefieldControllerInstance)//if it does not exist already
-            {
-                searchObject = GameObject.FindGameObjectWithTag("BattlefieldController");//look for GO
-                if (searchObject) battlefieldControllerInstance = searchObject.GetComponent<BattlefieldController>();//assign if it exists
-            }
+                battlefieldControllerInstance = GameObject.FindGameObjectWithTag("BattlefieldController").GetComponent<BattlefieldController>();
 
             if (!researchControllerInstance)//if it does not exist already
-            {
-                searchObject = GameObject.FindGameObjectWithTag("ResearchController");//look for GO
-                if (searchObject) researchControllerInstance = searchObject.GetComponent<ResearchController>();//assign if it exists
-            }
+                researchControllerInstanceject = GameObject.FindGameObjectWithTag("ResearchController").GetComponent<ResearchController>();
 
             if (!tavernControllerInstance)//if it does not exist already
-            {
-                searchObject = GameObject.FindGameObjectWithTag("TavernController");//look for GO
-                if (searchObject) tavernControllerInstance = searchObject.GetComponent<TavernController>();//assign if it exists
-            }
+                tavernControllerInstance = GameObject.FindGameObjectWithTag("TavernController").GetComponent<TavernController>();
 
             if (!infoPromptControllerInstance)//if it does not exist already
-            {
-                searchObject = GameObject.FindGameObjectWithTag("UIPromptController");//look for GO
-                if (searchObject) infoPromptControllerInstance = searchObject.GetComponent<InfoPromptController>();//assign if it exists
-            }
+                infoPromptControllerInstance = GameObject.FindGameObjectWithTag("UIPromptController").GetComponent<InfoPromptController>();
+
+            //main camera
+            if (!mainCameraTransform)//if it does not exist already
+                mainCameraTransform.FindGameObjectWithTag("MainCamera").transform;//assign if it exists
         }
 
         protected virtual void Start()

@@ -82,7 +82,8 @@ namespace AncientArmory
 
         void SendToArmory()
         {
-            // 
+            armoryControllerInstance.Scavengers.Add(newMerc);
+            newMerc.transform.parent = Battlefield.transform;
         }
 
         void SendToBattlefield()
