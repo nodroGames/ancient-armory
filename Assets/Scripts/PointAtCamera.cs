@@ -7,7 +7,7 @@ namespace AncientArmory
         /// <summary>
         /// Continuously manipulate transform every frame.
         /// </summary>
-        public bool updateEveryFrame = true;
+        public bool updateEveryFrame = false;
 
         /// <summary>
         /// If this is null, will assume main camera.
