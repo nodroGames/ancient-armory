@@ -20,8 +20,13 @@ namespace AncientArmory
         /// </summary>
         private Transform myTransform;//cache of transform on this object
 
-        // Start is called before the first frame update
-        void Start()
+
+        private void Awake()
+        {
+            GatherReferencers();
+        }
+        
+        private void GatherReferencers()
         {
             if (!cameraTransform)//if one has not bee provided
             {
@@ -29,8 +34,6 @@ namespace AncientArmory
             }
 
             myTransform = this.gameObject.transform;//cache ref
-
-            DoPointAtCamera();
         }
 
         private void OnEnable()
