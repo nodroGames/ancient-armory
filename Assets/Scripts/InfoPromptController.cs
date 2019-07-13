@@ -22,7 +22,7 @@ namespace AncientArmory
         private GameObject quartermasterUIElement;
 
         [SerializeField]
-        private GameObject breakthroughUIElement;
+        private GameObject researchUIElement;
 
         [Header("---Money UI Elements---")]
         [SerializeField]
@@ -82,7 +82,7 @@ namespace AncientArmory
 
             else if (requestingController is ResearchController)
             {
-                SetActiveWindow(breakthroughUIElement);
+                SetActiveWindow(researchUIElement);
                 costText.gameObject.SetActive(true);
                 availableFundsText.gameObject.SetActive(true);
             }
@@ -152,7 +152,7 @@ namespace AncientArmory
             recruiterUIElement.SetActive(false);
             commanderUIElement.SetActive(false);
             quartermasterUIElement.SetActive(false);
-            breakthroughUIElement.SetActive(false);
+            researchUIElement.SetActive(false);
 
             desiredWindow.SetActive(true);
         }
