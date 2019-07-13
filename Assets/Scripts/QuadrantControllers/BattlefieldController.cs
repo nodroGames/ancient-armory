@@ -13,16 +13,8 @@ namespace AncientArmory
         List<GameObject> MiddleLine;
         List<GameObject> BackLine;
 
-        float twoSecondsFromNow;
-        float fiveSecondsFromNow;
-        float tenSecondsFromNow;
-
-        void Start()
+        public override void Start()
         {
-            base.Start();
-            tenSecondsFromNow = Time.time + 10;
-            fiveSecondsFromNow = Time.time + 5;
-            twoSecondsFromNow = Time.time + 2;
         }
 
         void Update()
