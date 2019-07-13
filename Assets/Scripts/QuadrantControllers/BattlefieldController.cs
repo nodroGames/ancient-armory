@@ -13,7 +13,7 @@ namespace AncientArmory
         List<GameObject> MiddleLine;
         List<GameObject> BackLine;
 
-        public override void Start()
+        protected override void Start()
         {
         }
 
