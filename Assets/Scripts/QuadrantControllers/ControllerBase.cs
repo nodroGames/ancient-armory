@@ -148,6 +148,8 @@ namespace AncientArmory
         /// </summary>
         public virtual void OnReadyIconPressed()
         {
+            // TODO: Move call to InfoPromptController.ShowInfoPrompt here?
+
             //Debug.Log("Ready icon pressed!", this);
             ShowInfoPrompt();
         }
