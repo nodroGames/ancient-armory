@@ -13,14 +13,24 @@ namespace AncientArmory
 
         public int MercsSpawned;
         public GameObject MercPrefab;
+        List<GameObject> DeadPool;
+        GameObject Armory;
+        GameObject Tavern;
+
+        GameObject newMerc;
 
         void Start()
         {
             base.Start();
             cooldownDelay = 10;
             cooldownMessage = "cooldownMessage";
+            Armory = GameObject.FindGameObjectWithTag("ArmoryController");
+            Battlefield = GameObject.FindGameObjectWithTag("BattlefieldController");
+            Tavern = GameObject.FindGameObjectWithTag("TavernController");
+
             StartTimerCycle();
         }
+
 
 
         /// <summary>
@@ -29,8 +39,8 @@ namespace AncientArmory
         public override void OnReadyIconPressed()
         {
             base.OnReadyIconPressed();
-            GameObject merc = SpawnMerc();
-            merc.GetComponent<Character>();
+            newMerc = SpawnMerc();
+            newMerc.GetComponent<Character>();
             infoPromptControllerInstance.LoadInfo("lookie, merc details");
         }
 
@@ -40,22 +50,22 @@ namespace AncientArmory
         public override void OnRightButton()//accept
         {
             Debug.Log("Send to Armory!", this);
-            timerController.onTimerComplete.AddListener(OnRecruitingComplete);
-            timerController.StartTimer(currentResearch.secondsToComplete, inProcessMessage);//start researching thing
+            SendToArmory();
             readyIcon.SetActive(false);
-            //deduct money
+            // deduct money
         }
 
 
         /// <summary>
         /// Called by Button.
         /// </summary>
-        public virtual void OnLeftButton()
+        public override void OnLeftButton()
         {
             Debug.Log("Send to Battlefield!", this);
+            SendToBattlefield();
             StartTimerCycle();//get a different one
             readyIcon.SetActive(false);
-            //do the left thing
+            // deduct money
         }
 
         /// <summary>
@@ -63,34 +73,46 @@ namespace AncientArmory
         /// </summary>
         private void OnRecruitingComplete()
         {
-            Debug.Log("Research Complete! Increment up!", this);
+            Debug.Log("Recruiting Complete! Increment up!", this);
             currentResearch.OnResearchComplete();
             timerController.onTimerComplete.RemoveListener(OnResearchComplete);
             StartCoroutine(ShowCompleteWindow());//show message to player
             //TimerCycle();//or do so immediately
         }
 
+        void SendToArmory()
+        {
+            // 
+        }
+
+        void SendToBattlefield()
+        {
+            battlefieldControllerInstance.WaitingLine.Add(newMerc);
+            newMerc.transform.parent = Battlefield.transform;
+        }
+
         GameObject SpawnMerc()
         {
-            GameObject newMerc;
             Character merc;
             if (Tavern.transform.childCount == 0) // if pool is empty
             {
                 // instantiate prefab at spawn position
                 newMerc = Instantiate(MercPrefab, Tavern.transform);
                 // Create new character
-                merc = GameDatabase.Classes.CreateCharacter(newMerc, "Soldier", 1, GameDatabase.Extensions);
-                merc.Level = MercsSpawned;
+                mercCharacter = GameDatabase.Classes.CreateCharacter(newMerc, "Soldier", 1, GameDatabase.Extensions);
+                mercCharacter.Level = ++MercsSpawned;
+                assignStats(merc);
             }
             else // if pool has mercs
             {
                 // Relocate to spawn position
-                newMerc = getPoolContents(Tavern)[0];
+                newMerc = DeadPool[0];
                 newMerc.SetActive(true);
                 newMerc.transform.parent = Tavern.transform;
-                merc = newMerc.GetComponent<Character>();
+                mercCharacter = newMerc.GetComponent<Character>();
                 // Set level of existing character
-                merc.Level = MercsSpawned;
+                mercCharacter.Level = ++MercsSpawned;
+                assignStats(mercCharacter);
             }
             return newMerc;
         }
