@@ -101,17 +101,14 @@ namespace AncientArmory
         /// </summary>
         void SpawnMerc()
         {
+            Character mercCharacter;
             if (Tavern.transform.childCount == 0) // if pool is empty
             {
                 // Create a new instance of MercPrefab TODO: get exact start location
                 newMerc = Instantiate(MercPrefab, Tavern.transform);
                 // Create new character mono & attach it to newMerc
-                Character mercCharacter = GameDatabase.Classes.CreateCharacter(newMerc, "Soldier", 1, GameDatabase.Extensions);
-                // New merc level is equal to the number of mercs spawned
-                mercCharacter.Level = ++MercsSpawned;
-
-                attachMercController();
-                assignStats(mercCharacter);
+                mercCharacter = GameDatabase.Classes.CreateCharacter(newMerc, "Soldier", 1, GameDatabase.Extensions);
+                newMerc.AddComponent<MercController>();
             }
             else // if pool has mercs
             {
@@ -122,16 +119,12 @@ namespace AncientArmory
                 // Move to Tavern position. TODO: get exact start location
                 newMerc.transform.parent = Tavern.transform;
                 // Get existing Character component
-                Character mercCharacter = newMerc.GetComponent<Character>();
-                // New merc level is equal to the number of mercs spawned
-                mercCharacter.Level = ++MercsSpawned;
-                assignStats(mercCharacter);
+                mercCharacter = newMerc.GetComponent<Character>();
             }
-        }
-
-        void attachMercController()
-        {
-            
+            // New merc level is equal to the number of mercs spawned
+            mercCharacter.Level = ++MercsSpawned;
+            assignStats(mercCharacter);
+            newMerc.GetComponent<MercController>().SetHealth();
         }
 
         void assignStats(Character merc)
