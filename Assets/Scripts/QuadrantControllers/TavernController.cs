@@ -21,7 +21,7 @@ namespace AncientArmory
 
         GameObject newMerc;
 
-        override void Start()
+        protected override void Start()
         {
             base.Start();
             AddStaticReferences();
@@ -32,7 +32,6 @@ namespace AncientArmory
 
         void AddStaticReferences()
         {
-            base.GatherStaticReferences();
             Armory = GameObject.FindGameObjectWithTag("ArmoryController");
             Battlefield = GameObject.FindGameObjectWithTag("BattlefieldController");
             Tavern = GameObject.FindGameObjectWithTag("TavernController");
@@ -100,7 +99,7 @@ namespace AncientArmory
         /// <summary>
         /// Must be called before any other function that uses newMerc.
         /// </summary>
-        GameObject SpawnMerc()
+        void SpawnMerc()
         {
             if (Tavern.transform.childCount == 0) // if pool is empty
             {
@@ -135,7 +134,7 @@ namespace AncientArmory
             
         }
 
-        void assignStats()
+        void assignStats(Character merc)
         {
             
         }
