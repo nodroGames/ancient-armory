@@ -24,7 +24,7 @@ namespace AncientArmory
 
         protected override void ShowInfoPrompt()
         {
-            infoPromptControllerInstance.ShowInfoPrompt(this, currentResearch.description, currentResearch.goldCost.ToString());
+            infoPromptControllerInstance.ShowInfoPrompt(this, leftButtonText, rightButtonText, currentResearch.description, currentResearch.goldCost.ToString());
         }
 
         /// <summary>

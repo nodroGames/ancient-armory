@@ -102,7 +102,7 @@ GameObject:
   - component: {fileID: 262592437551544683}
   - component: {fileID: 262592437551544682}
   m_Layer: 0
-  m_Name: ResearchController Prefab
+  m_Name: Research Controller Prefab
   m_TagString: ResearchController
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -136,12 +136,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 497da03f74bda3447bbc622e3149f1dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  leaderName: Researcher
   timerController: {fileID: 7100336189582619224}
   readyIcon: {fileID: 3719618502271575132}
   completeWindow: {fileID: 5215731011757067225}
   cooldownDelay: 5
   cooldownMessage: Getting New Research...
   inProcessMessage: Researching...
+  leftButtonText: Skip & Continue to R&D
+  rightButtonText: Purchase Research
   researchArray:
   - {fileID: 11400000, guid: 96375487853ebe449afbff3159e2f10d, type: 2}
   - {fileID: 11400000, guid: 3f651cda0fe7ea741b227727e9e086ed, type: 2}

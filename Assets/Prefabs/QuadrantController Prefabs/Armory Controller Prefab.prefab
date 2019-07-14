@@ -235,10 +235,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 774243840497913174}
-  - component: {fileID: 774243840497913171}
   - component: {fileID: 6274441718069340035}
   m_Layer: 0
-  m_Name: ArmoryController
+  m_Name: Armory Controller Prefab
   m_TagString: ArmoryController
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -260,24 +259,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &774243840497913171
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 774243840497913168}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e93198a8b64bbd747bd2024cb51f02cf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  timerController: {fileID: 7751599722949969509}
-  readyIcon: {fileID: 4216773980356415585}
-  completeWindow: {fileID: 4718575580027289572}
-  cooldownDelay: 5
-  cooldownMessage: thinking....
-  inProcessMessage: processing
 --- !u!114 &6274441718069340035
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -290,12 +271,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0bfe3afd706de0145aa6c919f30af49c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timerController: {fileID: 0}
-  readyIcon: {fileID: 0}
-  completeWindow: {fileID: 0}
-  cooldownDelay: 5
-  cooldownMessage: 
-  inProcessMessage: 
+  leaderName: Quartermaster
+  timerController: {fileID: 7751599722949969509}
+  readyIcon: {fileID: 4216773980356415585}
+  completeWindow: {fileID: 4718575580027289572}
+  cooldownDelay: 3
+  cooldownMessage: Scavenging...
+  inProcessMessage: Returning to Surface...
+  leftButtonText: Use on the Battlefield
+  rightButtonText: Scrap item for money
   mercArray: []
   Scavengers: []
 --- !u!1 &774243841169249669
@@ -508,7 +492,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 774243840497913171}
+      - m_Target: {fileID: 6274441718069340035}
         m_MethodName: OnReadyIconPressed
         m_Mode: 1
         m_Arguments:

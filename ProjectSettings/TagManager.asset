@@ -9,6 +9,7 @@ TagManager:
   - TavernController
   - ArmoryController
   - UIPromptController
+  - GameDatabase
   layers:
   - Default
   - TransparentFX

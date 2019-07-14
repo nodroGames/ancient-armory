@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5430956550228051418}
   m_Layer: 0
   m_Name: GameDatabase
-  m_TagString: Untagged
+  m_TagString: GameDatabase
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -40,7 +40,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5431258694118523895}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0362aff80de9748feaa4c5f634d937e8, type: 3}
+  m_Script: {fileID: 11500000, guid: 65c3df2714c75274896541ed33f313a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Weapons: {fileID: 0}

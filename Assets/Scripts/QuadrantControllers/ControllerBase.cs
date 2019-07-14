@@ -10,29 +10,57 @@ namespace AncientArmory
         protected static ResearchController researchControllerInstance;
         protected static ArmoryController armoryControllerInstance;
         protected static InfoPromptController infoPromptControllerInstance;
-        protected static Transform mainCameraTransform;
 
         [Header("---ControllerBase---")]
         [SerializeField]
+        protected string leaderName = "General Rick";
+
+        [SerializeField]
         protected TimerController timerController;
 
+        /// <summary>
+        /// Icon with Button that informs Player Timer is complete.
+        /// </summary>
         [Header("---UI---")]
-
         [SerializeField]
+        [Tooltip("Icon with Button that informs Player Timer is complete.")]
         protected GameObject readyIcon;
 
+        /// <summary>
+        /// Icon with Button that informs Player Timer is complete.
+        /// </summary>
         [SerializeField]
+        [Tooltip("Icon with Button that informs Player Timer is complete.")]
         protected GameObject completeWindow;
 
+        /// <summary>
+        /// Amount it takes to do one timer cycle.
+        /// </summary>
         [Header("---Timer---")]
         [SerializeField]
+        [Tooltip("Amount it takes to do one timer cycle.")]
         protected int cooldownDelay = 5;
 
+        /// <summary>
+        /// Message to show above head during timer countdown.
+        /// </summary>
         [SerializeField]
+        [Tooltip("Message to show above head during timer countdown.")]
         protected string cooldownMessage;
 
+        /// <summary>
+        /// Message to show above head if it takes time to process (training, researching).
+        /// </summary>
         [SerializeField]
+        [Tooltip("Message to show above head if it takes time to process (training, researching).")]
         protected string inProcessMessage;
+
+        [Header("---Button Text---")]
+        [SerializeField]
+        protected string leftButtonText = "Do the left thing.";
+
+        [SerializeField]
+        protected string rightButtonText = "Do the right thing.";
 
         protected virtual void Awake()
         {
@@ -76,6 +104,9 @@ namespace AncientArmory
             timerController.onTimerComplete.RemoveListener(OnCooldownComplete);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         protected virtual void OnCooldownComplete()
         {
             Debug.Log("Click on the Leader!  " + this.name  + " thing is ready.", this);
@@ -90,9 +121,12 @@ namespace AncientArmory
 
         protected virtual void ShowInfoPrompt()
         {
-            infoPromptControllerInstance.ShowInfoPrompt(this);
+            infoPromptControllerInstance.ShowInfoPrompt(this, leftButtonText, rightButtonText, "GENERIC TEXT");
         }
 
+        /// <summary>
+        /// Where it all begins.
+        /// </summary>
         protected virtual void StartTimerCycle()
         {
             //hide UI elements
@@ -148,6 +182,11 @@ namespace AncientArmory
 
             //Debug.Log("Ready icon pressed!", this);
             ShowInfoPrompt();
+        }
+
+        public string GetLeaderName()
+        {
+            return leaderName;
         }
     }
 }

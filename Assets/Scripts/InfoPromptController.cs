@@ -8,21 +8,26 @@ namespace AncientArmory
 {
     public class InfoPromptController : MonoBehaviour
     {
-        [SerializeField]
-        private GameObject UIRoot;
 
         [Header("---Leader UI Elements---")]
         [SerializeField]
-        private GameObject recruiterUIElement;
+        private GameObject UIRoot;
 
         [SerializeField]
-        private GameObject commanderUIElement;
+        private TextMeshProUGUI windowTitleTMP;
+
+        [Header("---Buttons---")]
+        [SerializeField]
+        private Button leftButton;
 
         [SerializeField]
-        private GameObject quartermasterUIElement;
+        private Button rightButton;
 
         [SerializeField]
-        private GameObject researchUIElement;
+        private TextMeshProUGUI leftButtonTMP;
+            
+        [SerializeField]
+        private TextMeshProUGUI rightButtonTMP;
 
         [Header("---Money UI Elements---")]
         [SerializeField]
@@ -34,28 +39,34 @@ namespace AncientArmory
         [SerializeField]
         private TextMeshProUGUI availableFundsText;
 
-        private readonly ControllerBase[] controllerBaseList = new ControllerBase[4];//4 controllers
-
         private void Start()
         {
             ToggleVisuals(false);//start with everything hidden
         }
 
         /// <summary>
-        /// Register a controller with this Class for callbacks.
+        /// Subscribe Left and Right funcs to LR Buttons.
         /// </summary>
-        /// <param name="newControllerBase"></param>
-        public void RegisterController(ControllerBase newControllerBase)
+        /// <param name="leftButton"></param>
+        /// <param name="rightButton"></param>
+        /// <param name="quadrantController"></param>
+        private void SubscribeToLRButtonEvents(ControllerBase quadrantController)
         {
-            for(var i = 0; i < controllerBaseList.Length; ++i)
-            {
-                if(controllerBaseList[i] == null)
-                {
-                    controllerBaseList[i] = newControllerBase;
-                    return;
-                }
-            }
-            Debug.LogError("ERROR! More Controllers being registered than expected. more than 4??", this);
+            leftButton.onClick.AddListener(quadrantController.OnLeftButton);
+            rightButton.onClick.AddListener(quadrantController.OnRightButton);
+        }
+
+        /// <summary>
+        /// RemoveAllListeners from both Left and Right Buttons.
+        /// </summary>
+        private void UnsubcribeLRButtons()
+        {
+            leftButton.onClick.RemoveAllListeners();
+            rightButton.onClick.RemoveAllListeners();
+
+            //always have CloseDiaglogue subscribed;
+            leftButton.onClick.AddListener(CloseDialogue);
+            rightButton.onClick.AddListener(CloseDialogue);
         }
 
         /// <summary>
@@ -64,50 +75,58 @@ namespace AncientArmory
         /// <param name="requestingController"></param>
         /// <param name="infoString"></param>
         /// <param name="costString"></param>
-        public void ShowInfoPrompt(ControllerBase requestingController, string infoString = "", string costString = "")
+        public void ShowInfoPrompt(ControllerBase requestingController, string leftButtonString, string rightButtonString, string infoString, string costString = "")
         {
+            bool showMoney = true;//should any money be shown?
+
+            //figure out which window needs to be shown, and then show appropriate elements needed for each
             if(requestingController is ArmoryController)
             {
-                SetActiveWindow(quartermasterUIElement);
-                costText.gameObject.SetActive(true);
-                availableFundsText.gameObject.SetActive(true);
+                showMoney = true;
             }
 
             else if (requestingController is BattlefieldController)
             {
-                SetActiveWindow(commanderUIElement);
-                costText.gameObject.SetActive(false);
-                availableFundsText.gameObject.SetActive(false);
+                showMoney = false;
             }
 
             else if (requestingController is ResearchController)
             {
-                SetActiveWindow(researchUIElement);
-                costText.gameObject.SetActive(true);
-                availableFundsText.gameObject.SetActive(true);
+                showMoney = true;
             }
 
             else if (requestingController is TavernController)
             {
-                SetActiveWindow(recruiterUIElement);
-                costText.gameObject.SetActive(true);
-                availableFundsText.gameObject.SetActive(true);
+                showMoney = true;
             }
 
-            else
+            else//default
             {
-                //default
-                SetActiveWindow(recruiterUIElement);//place holder for default
-                costText.gameObject.SetActive(true);//place holder for default
-                availableFundsText.gameObject.SetActive(true);//place holder for default
+                showMoney = true;
                 Debug.Log("Generic info prompt. Do something generic.  YOLO!", requestingController);
             }
 
-            //show description
-            infoText.text = infoString;
-            costText.text = costString;
+            ToggleVisuals(true);
+
+            SubscribeToLRButtonEvents(requestingController);//subscribe to Button events
+
+            costText.gameObject.SetActive(showMoney);//show/hide money elements
+            availableFundsText.gameObject.SetActive(showMoney);
+
+            windowTitleTMP.text = requestingController.GetLeaderName();//set common texts
+            infoText.text = infoString;//set info paragraph
+
+            leftButtonTMP.text = leftButtonString;//set button info
+            rightButtonTMP.text = rightButtonString;
+
+            if (showMoney)//fill UI text
+            {
+                costText.text = costString;
+                //availableFundsText = //Get available funds!
+            }
+
         }
-        
+
         /// <summary>
         /// Load UI with data from SO.
         /// </summary>
@@ -139,19 +158,6 @@ namespace AncientArmory
             infoText.text = "this is an item.";
             costText.text = "$99999";
         }
-                
-        /// <summary>
-        /// Disable all windows except for this one.
-        /// </summary>
-        /// <param name="desiredWindow"></param>
-        public void SetActiveWindow(GameObject desiredWindow)
-        {
-            UIRoot.SetActive(true);//show background
-
-            DisableAllPrompts();
-
-            desiredWindow.SetActive(true);
-        }
 
         public void ToggleVisuals(bool active)
         {
@@ -164,14 +170,7 @@ namespace AncientArmory
         public void CloseDialogue()
         {
             ToggleVisuals(false);
-        }
-
-        void DisableAllPrompts()
-        {
-            recruiterUIElement.SetActive(false);
-            commanderUIElement.SetActive(false);
-            quartermasterUIElement.SetActive(false);
-            researchUIElement.SetActive(false);
+            UnsubcribeLRButtons();
         }
     }
 }

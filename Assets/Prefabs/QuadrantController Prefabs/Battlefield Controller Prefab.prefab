@@ -844,10 +844,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2552512576045502573}
-  - component: {fileID: 2492418449394366519}
   - component: {fileID: 7814808501923468779}
   m_Layer: 0
-  m_Name: BattlefieldController
+  m_Name: Battlefield Controller Prefab
   m_TagString: BattlefieldController
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -861,7 +860,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2552512576045502571}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -1.615, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2492418448186089696}
@@ -869,24 +868,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2492418449394366519
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2552512576045502571}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e93198a8b64bbd747bd2024cb51f02cf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  timerController: {fileID: 4880570576589910785}
-  readyIcon: {fileID: 1345606947028559109}
-  completeWindow: {fileID: 7589634685915204224}
-  cooldownDelay: 5
-  cooldownMessage: thinking....
-  inProcessMessage: processing
 --- !u!114 &7814808501923468779
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -899,12 +880,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 989fc72089d36420c922bef3a622152a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timerController: {fileID: 0}
-  readyIcon: {fileID: 0}
-  completeWindow: {fileID: 0}
+  leaderName: Commander
+  timerController: {fileID: 4880570576589910785}
+  readyIcon: {fileID: 1345606947028559109}
+  completeWindow: {fileID: 7589634685915204224}
   cooldownDelay: 5
   cooldownMessage: 
   inProcessMessage: 
+  leftButtonText: Assign as Brawler
+  rightButtonText: Assign as Ranger
   WaitingLine: []
 --- !u!1 &2805060005676507564
 GameObject:
@@ -1024,7 +1008,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2492418449394366519}
+      - m_Target: {fileID: 7814808501923468779}
         m_MethodName: OnReadyIconPressed
         m_Mode: 1
         m_Arguments:

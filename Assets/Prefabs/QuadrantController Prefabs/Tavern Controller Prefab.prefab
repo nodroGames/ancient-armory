@@ -953,7 +953,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2526136053952918431}
+      - m_Target: {fileID: 3598207322743657984}
         m_MethodName: OnReadyIconPressed
         m_Mode: 1
         m_Arguments:
@@ -975,10 +975,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3598207322743657987}
-  - component: {fileID: 2526136053952918431}
   - component: {fileID: 3598207322743657984}
   m_Layer: 0
-  m_Name: TavernController
+  m_Name: Tavern Controller Prefab
   m_TagString: TavernController
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1000,24 +999,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2526136053952918431
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3598207322743657985}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e93198a8b64bbd747bd2024cb51f02cf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  timerController: {fileID: 4765722168827918505}
-  readyIcon: {fileID: 1383999709282250413}
-  completeWindow: {fileID: 7551329919894667560}
-  cooldownDelay: 5
-  cooldownMessage: thinking....
-  inProcessMessage: processing
 --- !u!114 &3598207322743657984
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1030,12 +1011,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97b909909d5cd443fb3bc4c3e6dbce78, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timerController: {fileID: 0}
-  readyIcon: {fileID: 0}
-  completeWindow: {fileID: 0}
+  leaderName: Recruiter
+  timerController: {fileID: 4765722168827918505}
+  readyIcon: {fileID: 1383999709282250413}
+  completeWindow: {fileID: 7551329919894667560}
   cooldownDelay: 5
-  cooldownMessage: 
-  inProcessMessage: 
+  cooldownMessage: Recruiting...
+  inProcessMessage: Training...
+  leftButtonText: Assign to Battlefield
+  rightButtonText: Assign to Armory
   MercsSpawned: 0
   MercPrefab: {fileID: 0}
 --- !u!1 &4605937942968818411
