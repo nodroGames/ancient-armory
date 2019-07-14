@@ -429,6 +429,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2492418450103593418}
     m_Modifications:
+    - target: {fileID: 7396069113695894269, guid: f2931e93f493d6746b885d966a8a5922,
+        type: 3}
+      propertyPath: m_Name
+      value: Ready Icon
+      objectReference: {fileID: 0}
+    - target: {fileID: 7396069113695894269, guid: f2931e93f493d6746b885d966a8a5922,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7485686479054058766, guid: f2931e93f493d6746b885d966a8a5922,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -534,16 +544,6 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 7396069113695894269, guid: f2931e93f493d6746b885d966a8a5922,
-        type: 3}
-      propertyPath: m_Name
-      value: Ready Icon
-      objectReference: {fileID: 0}
-    - target: {fileID: 7396069113695894269, guid: f2931e93f493d6746b885d966a8a5922,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 2433494548858761382, guid: f2931e93f493d6746b885d966a8a5922,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -553,42 +553,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: OnReadyIconPressed
-      objectReference: {fileID: 0}
-    - target: {fileID: 329196246999514275, guid: f2931e93f493d6746b885d966a8a5922,
-        type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 329196246999514275, guid: f2931e93f493d6746b885d966a8a5922,
-        type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8167549099896039553, guid: f2931e93f493d6746b885d966a8a5922,
-        type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: dd6b8ad6e9f365543b1fffb3ae943d4a,
-        type: 3}
-    - target: {fileID: 8167549099896039553, guid: f2931e93f493d6746b885d966a8a5922,
-        type: 3}
-      propertyPath: m_Type
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8167549099896039553, guid: f2931e93f493d6746b885d966a8a5922,
-        type: 3}
-      propertyPath: m_Color.r
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8167549099896039553, guid: f2931e93f493d6746b885d966a8a5922,
-        type: 3}
-      propertyPath: m_Color.g
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8167549099896039553, guid: f2931e93f493d6746b885d966a8a5922,
-        type: 3}
-      propertyPath: m_Color.b
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f2931e93f493d6746b885d966a8a5922, type: 3}
@@ -611,6 +575,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2552512576045502573}
     m_Modifications:
+    - target: {fileID: 4877354674240378272, guid: 11ccc0e8459515b498b204c9b30e1845,
+        type: 3}
+      propertyPath: m_Name
+      value: CommanderColor
+      objectReference: {fileID: 0}
     - target: {fileID: 5371433551486050138, guid: 11ccc0e8459515b498b204c9b30e1845,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -675,11 +644,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.y
       value: 0.025
-      objectReference: {fileID: 0}
-    - target: {fileID: 4877354674240378272, guid: 11ccc0e8459515b498b204c9b30e1845,
-        type: 3}
-      propertyPath: m_Name
-      value: CommanderColor
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 11ccc0e8459515b498b204c9b30e1845, type: 3}
