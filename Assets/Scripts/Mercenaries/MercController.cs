@@ -19,12 +19,10 @@ namespace AncientArmory
         [SerializeField]
         private int currentHealth = 0;
 
-        [Header("---Equipment---")]
         Weapon weapon;
         public int defense;
         Character myCharacter;
 
-        [Header("---UI---")]
         [SerializeField]
         private HealthUIController healthController;
 
@@ -85,6 +83,14 @@ namespace AncientArmory
                 Die();
             else
                 healthController.UpdateHealth(currentHealth, maxHealth);
+        }
+
+        public int Attack(MercController target)
+        {
+            bool hit = myCharacter.AttackCheck(weapon, target.defense);
+            if (hit)
+                return myCharacter.Attack(weapon, target.defense);
+            return 0;
         }
 
         public int Attack(MercController target)
