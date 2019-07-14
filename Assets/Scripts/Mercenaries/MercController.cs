@@ -92,5 +92,17 @@ namespace AncientArmory
                 return myCharacter.Attack(weapon, target.defense);
             return 0;
         }
+
+        // This may be used in the future
+        int resolveSingleOrDualWeildAttack(MercController attacker, int defense)
+        {
+            int damage = 0;
+            if (attacker.Right_Hand.Name != "None")
+                damage = attacker.Attack(attacker.Right_Hand, defense);
+            if (attacker.Left_Hand.Name != "None" || attacker.Right_Hand.Name == "None")
+                damage = attacker.Attack(attacker.Left_Hand, defense);
+            return damage;
+        }
+
     }
 }
