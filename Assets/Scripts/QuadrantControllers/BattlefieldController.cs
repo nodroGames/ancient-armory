@@ -44,21 +44,59 @@ namespace AncientArmory
             // }
         }
 
-        void SetDefender(GameObject merc, string position)
+
+        //
+        // Timer Cycle Functions
+        //
+
+        public override void OnReadyIconPressed()
+        {
+            base.OnReadyIconPressed();
+            infoPromptControllerInstance.LoadInfo(nextMerc.GetComponent<MercController>());
+        }
+
+        public override void OnRightButton()//accept
+        {
+            Debug.Log("Send to Ranged!", this);
+            SetDefender();
+            readyIcon.SetActive(false);
+            StartTimerCycle(); // Start again
+        }
+
+        public override void OnLeftButton()
+        {
+            Debug.Log("Send to Melee!", this);
+            SendToBattlefield();
+            readyIcon.SetActive(false);
+            StartTimerCycle(); // Start again
+        }
+
+        private void OnRecruitingComplete()
+        {
+            Debug.Log("Recruiting Complete! Increment up!", this);
+            timerController.onTimerComplete.RemoveListener(OnRecruitingComplete);
+            StartCoroutine(ShowCompleteWindow()); //show message to player
+            //TimerCycle(); //or do so immediately
+        }
+
+        
+        // 
+        // Merc Control Functions
+        //
+
+        void SetDefender(string position)
         {
             switch (position) {
                 case "melee":
-                    setDefenderInList(merc, FrontLine, BackLine);
+                    // If possible, place next merc in Front Line
+                    setDefenderInList(WaitingLine[0], FrontLine, BackLine);
                     break;
                 case "ranged":
-                    setDefenderInList(merc, BackLine, FrontLine);
+                    // If possible, place next merc in Back Line
+                    setDefenderInList(WaitingLine[0], BackLine, FrontLine);
                     break;
             }
         }
-
-        // 
-        //
-        // Helper Functions
 
         void setDefenderInList(GameObject merc, List<GameObject> desiredList, List<GameObject> alternateList)
         {
@@ -68,16 +106,6 @@ namespace AncientArmory
                 MiddleLine.Add(merc);
             else if (alternateList.Count > 6)
                 alternateList.Add(merc);
-        }
-
-        int resolveSingleOrDualWeildAttack(Character attacker, int defense)
-        {
-            int damage = 0;
-            if (attacker.Right_Hand.Name != "None")
-                damage = attacker.Attack(attacker.Right_Hand, defense);
-            if (attacker.Left_Hand.Name != "None" || attacker.Right_Hand.Name == "None")
-                damage = attacker.Attack(attacker.Left_Hand, defense);
-            return damage;
         }
     }
 }
