@@ -92,14 +92,5 @@ namespace AncientArmory
                 return myCharacter.Attack(weapon, target.defense);
             return 0;
         }
-
-        public int Attack(MercController target)
-        {
-            bool hit = myCharacter.AttackCheck(weapon, target.defense);
-            if (hit)
-                return myCharacter.Attack(weapon, target.defense);
-            return 0;
-        }
-
     }
 }
