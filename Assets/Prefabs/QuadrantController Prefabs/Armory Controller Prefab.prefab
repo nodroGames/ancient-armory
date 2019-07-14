@@ -200,7 +200,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   leaderName: Quartermaster
   timerController: {fileID: 7193830020239487793}
-  readyIcon: {fileID: 5788649632984999926}
+  readyIcon: {fileID: 2798053426859409668, guid: 1da25bcbb867f5e4abbf5f12d8e1743e,
+    type: 3}
   completeWindow: {fileID: 2950673562407671591}
   cooldownDelay: 3
   cooldownMessage: Scavenging...
@@ -464,16 +465,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 774243839914515630}
     m_Modifications:
-    - target: {fileID: 7396069113695894269, guid: f2931e93f493d6746b885d966a8a5922,
-        type: 3}
-      propertyPath: m_Name
-      value: Ready Icon
-      objectReference: {fileID: 0}
-    - target: {fileID: 7396069113695894269, guid: f2931e93f493d6746b885d966a8a5922,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 7485686479054058766, guid: f2931e93f493d6746b885d966a8a5922,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -579,6 +570,16 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 7396069113695894269, guid: f2931e93f493d6746b885d966a8a5922,
+        type: 3}
+      propertyPath: m_Name
+      value: Ready Icon
+      objectReference: {fileID: 0}
+    - target: {fileID: 7396069113695894269, guid: f2931e93f493d6746b885d966a8a5922,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2433494548858761382, guid: f2931e93f493d6746b885d966a8a5922,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -591,12 +592,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f2931e93f493d6746b885d966a8a5922, type: 3}
---- !u!1 &5788649632984999926 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7396069113695894269, guid: f2931e93f493d6746b885d966a8a5922,
-    type: 3}
-  m_PrefabInstance: {fileID: 3959076972080979211}
-  m_PrefabAsset: {fileID: 0}
 --- !u!224 &5842285505716611077 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7485686479054058766, guid: f2931e93f493d6746b885d966a8a5922,
@@ -771,11 +766,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 774243840497913174}
     m_Modifications:
-    - target: {fileID: 9153154927516916142, guid: e4c4d6f31bc707c45b093eaf7435dcf3,
-        type: 3}
-      propertyPath: m_Name
-      value: QuartermasterColor
-      objectReference: {fileID: 0}
     - target: {fileID: 8738965439301587399, guid: e4c4d6f31bc707c45b093eaf7435dcf3,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -840,6 +830,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.y
       value: 0.025
+      objectReference: {fileID: 0}
+    - target: {fileID: 9153154927516916142, guid: e4c4d6f31bc707c45b093eaf7435dcf3,
+        type: 3}
+      propertyPath: m_Name
+      value: QuartermasterColor
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e4c4d6f31bc707c45b093eaf7435dcf3, type: 3}

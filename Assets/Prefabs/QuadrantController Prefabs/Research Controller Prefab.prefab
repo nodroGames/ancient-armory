@@ -139,7 +139,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   leaderName: Researcher
   timerController: {fileID: 7100336189582619224}
-  readyIcon: {fileID: 3719618502271575132}
+  readyIcon: {fileID: 6551819410772272683, guid: 128e5a009de884a4f866e3023356e3fa,
+    type: 3}
   completeWindow: {fileID: 5215731011757067225}
   cooldownDelay: 5
   cooldownMessage: Getting New Research...
@@ -755,16 +756,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 262592438294325395}
     m_Modifications:
-    - target: {fileID: 7396069113695894269, guid: f2931e93f493d6746b885d966a8a5922,
-        type: 3}
-      propertyPath: m_Name
-      value: Ready Icon
-      objectReference: {fileID: 0}
-    - target: {fileID: 7396069113695894269, guid: f2931e93f493d6746b885d966a8a5922,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 7485686479054058766, guid: f2931e93f493d6746b885d966a8a5922,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -870,6 +861,16 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 7396069113695894269, guid: f2931e93f493d6746b885d966a8a5922,
+        type: 3}
+      propertyPath: m_Name
+      value: Ready Icon
+      objectReference: {fileID: 0}
+    - target: {fileID: 7396069113695894269, guid: f2931e93f493d6746b885d966a8a5922,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2433494548858761382, guid: f2931e93f493d6746b885d966a8a5922,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -877,12 +878,6 @@ PrefabInstance:
       objectReference: {fileID: 262592437551544682}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f2931e93f493d6746b885d966a8a5922, type: 3}
---- !u!1 &3719618502271575132 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7396069113695894269, guid: f2931e93f493d6746b885d966a8a5922,
-    type: 3}
-  m_PrefabInstance: {fileID: 6141398055859707553}
-  m_PrefabAsset: {fileID: 0}
 --- !u!224 &3663714371843713967 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7485686479054058766, guid: f2931e93f493d6746b885d966a8a5922,

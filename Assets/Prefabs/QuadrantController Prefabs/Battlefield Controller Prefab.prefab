@@ -200,7 +200,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   leaderName: Commander
   timerController: {fileID: 3473491613936356905}
-  readyIcon: {fileID: 3973419250757930978}
+  readyIcon: {fileID: 1186280029895973273, guid: 29e4dbeb67a4e154e8ab6375c1fd770f,
+    type: 3}
   completeWindow: {fileID: 4299922952392651712}
   cooldownDelay: 5
   cooldownMessage: 
@@ -429,16 +430,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2492418450103593418}
     m_Modifications:
-    - target: {fileID: 7396069113695894269, guid: f2931e93f493d6746b885d966a8a5922,
-        type: 3}
-      propertyPath: m_Name
-      value: Ready Icon
-      objectReference: {fileID: 0}
-    - target: {fileID: 7396069113695894269, guid: f2931e93f493d6746b885d966a8a5922,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 7485686479054058766, guid: f2931e93f493d6746b885d966a8a5922,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -544,6 +535,16 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 7396069113695894269, guid: f2931e93f493d6746b885d966a8a5922,
+        type: 3}
+      propertyPath: m_Name
+      value: Ready Icon
+      objectReference: {fileID: 0}
+    - target: {fileID: 7396069113695894269, guid: f2931e93f493d6746b885d966a8a5922,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2433494548858761382, guid: f2931e93f493d6746b885d966a8a5922,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -556,12 +557,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f2931e93f493d6746b885d966a8a5922, type: 3}
---- !u!1 &3973419250757930978 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7396069113695894269, guid: f2931e93f493d6746b885d966a8a5922,
-    type: 3}
-  m_PrefabInstance: {fileID: 5872824128527201567}
-  m_PrefabAsset: {fileID: 0}
 --- !u!224 &3918965504836026385 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7485686479054058766, guid: f2931e93f493d6746b885d966a8a5922,
@@ -575,11 +570,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2552512576045502573}
     m_Modifications:
-    - target: {fileID: 4877354674240378272, guid: 11ccc0e8459515b498b204c9b30e1845,
-        type: 3}
-      propertyPath: m_Name
-      value: CommanderColor
-      objectReference: {fileID: 0}
     - target: {fileID: 5371433551486050138, guid: 11ccc0e8459515b498b204c9b30e1845,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -644,6 +634,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.y
       value: 0.025
+      objectReference: {fileID: 0}
+    - target: {fileID: 4877354674240378272, guid: 11ccc0e8459515b498b204c9b30e1845,
+        type: 3}
+      propertyPath: m_Name
+      value: CommanderColor
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 11ccc0e8459515b498b204c9b30e1845, type: 3}
