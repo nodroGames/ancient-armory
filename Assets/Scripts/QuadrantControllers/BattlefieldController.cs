@@ -52,13 +52,14 @@ namespace AncientArmory
         public override void OnReadyIconPressed()
         {
             base.OnReadyIconPressed();
+            GameObject nextMerc = WaitingLine[0];
             infoPromptControllerInstance.LoadInfo(nextMerc.GetComponent<MercController>());
         }
 
         public override void OnRightButton()//accept
         {
             Debug.Log("Send to Ranged!", this);
-            SetDefender();
+            SetDefenderInList(WaitingLine[0], BackLine, FrontLine);
             readyIcon.SetActive(false);
             StartTimerCycle(); // Start again
         }
@@ -66,7 +67,7 @@ namespace AncientArmory
         public override void OnLeftButton()
         {
             Debug.Log("Send to Melee!", this);
-            SendToBattlefield();
+            SetDefenderInList(WaitingLine[0], FrontLine, BackLine);
             readyIcon.SetActive(false);
             StartTimerCycle(); // Start again
         }
@@ -83,22 +84,7 @@ namespace AncientArmory
         // 
         // Merc Control Functions
         //
-
-        void SetDefender(string position)
-        {
-            switch (position) {
-                case "melee":
-                    // If possible, place next merc in Front Line
-                    setDefenderInList(WaitingLine[0], FrontLine, BackLine);
-                    break;
-                case "ranged":
-                    // If possible, place next merc in Back Line
-                    setDefenderInList(WaitingLine[0], BackLine, FrontLine);
-                    break;
-            }
-        }
-
-        void setDefenderInList(GameObject merc, List<GameObject> desiredList, List<GameObject> alternateList)
+        void SetDefenderInList(GameObject merc, List<GameObject> desiredList, List<GameObject> alternateList)
         {
             if (desiredList.Count > 6)
                 desiredList.Add(merc);
