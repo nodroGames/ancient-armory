@@ -81,14 +81,14 @@ namespace AncientArmory
 
         void SendToArmory()
         {
-            // Add delay + walking over animation
+            // TODO: Add delay + walking over animation
             armoryControllerInstance.Scavengers.Add(newMerc);
             newMerc.transform.parent = Battlefield.transform;
         }
 
         void SendToBattlefield()
         {
-            // Add delay + walking over animation
+            // TODO: Add delay + walking over animation
             battlefieldControllerInstance.WaitingLine.Add(newMerc);
             newMerc.transform.parent = Battlefield.transform;
         }
