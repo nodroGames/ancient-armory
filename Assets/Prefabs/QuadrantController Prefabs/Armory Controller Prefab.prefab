@@ -464,16 +464,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 774243839914515630}
     m_Modifications:
-    - target: {fileID: 7396069113695894269, guid: f2931e93f493d6746b885d966a8a5922,
-        type: 3}
-      propertyPath: m_Name
-      value: Ready Icon
-      objectReference: {fileID: 0}
-    - target: {fileID: 7396069113695894269, guid: f2931e93f493d6746b885d966a8a5922,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 7485686479054058766, guid: f2931e93f493d6746b885d966a8a5922,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -579,6 +569,16 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 7396069113695894269, guid: f2931e93f493d6746b885d966a8a5922,
+        type: 3}
+      propertyPath: m_Name
+      value: Ready Icon
+      objectReference: {fileID: 0}
+    - target: {fileID: 7396069113695894269, guid: f2931e93f493d6746b885d966a8a5922,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2433494548858761382, guid: f2931e93f493d6746b885d966a8a5922,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -588,6 +588,47 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: OnReadyIconPressed
+      objectReference: {fileID: 0}
+    - target: {fileID: 329196246999514275, guid: f2931e93f493d6746b885d966a8a5922,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 329196246999514275, guid: f2931e93f493d6746b885d966a8a5922,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8167549099896039553, guid: f2931e93f493d6746b885d966a8a5922,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 91c81182bb4970643b2cc397df97cb40,
+        type: 3}
+    - target: {fileID: 8167549099896039553, guid: f2931e93f493d6746b885d966a8a5922,
+        type: 3}
+      propertyPath: m_Type
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8167549099896039553, guid: f2931e93f493d6746b885d966a8a5922,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8167549099896039553, guid: f2931e93f493d6746b885d966a8a5922,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8167549099896039553, guid: f2931e93f493d6746b885d966a8a5922,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8167549099896039553, guid: f2931e93f493d6746b885d966a8a5922,
+        type: 3}
+      propertyPath: m_Color.a
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f2931e93f493d6746b885d966a8a5922, type: 3}
@@ -771,11 +812,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 774243840497913174}
     m_Modifications:
-    - target: {fileID: 9153154927516916142, guid: e4c4d6f31bc707c45b093eaf7435dcf3,
-        type: 3}
-      propertyPath: m_Name
-      value: QuartermasterColor
-      objectReference: {fileID: 0}
     - target: {fileID: 8738965439301587399, guid: e4c4d6f31bc707c45b093eaf7435dcf3,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -840,6 +876,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.y
       value: 0.025
+      objectReference: {fileID: 0}
+    - target: {fileID: 9153154927516916142, guid: e4c4d6f31bc707c45b093eaf7435dcf3,
+        type: 3}
+      propertyPath: m_Name
+      value: QuartermasterColor
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e4c4d6f31bc707c45b093eaf7435dcf3, type: 3}
