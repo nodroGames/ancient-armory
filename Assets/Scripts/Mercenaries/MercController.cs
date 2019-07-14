@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using RpgDB;
 
 namespace AncientArmory
 {
@@ -10,20 +11,18 @@ namespace AncientArmory
     public class MercController : MonoBehaviour
     {
         [SerializeField]
-        private string mercName;
+        private string name;
 
         [SerializeField]
-        private int maxHealth = 100;
+        private int maxHealth = 0;
 
         [SerializeField]
-        private int currentHealth = 100;
+        private int currentHealth = 0;
 
-        [Header("---Battle Stats---")]
-        [SerializeField]
-        private int attackValue = 2;
-
-        [SerializeField]
-        private int defenseValue = 1;
+        [Header("---Equipment---")]
+        Weapon weapon;
+        public int defense;
+        Character myCharacter;
 
         [Header("---UI---")]
         [SerializeField]
@@ -34,25 +33,36 @@ namespace AncientArmory
         private SpriteRenderer mySpriteRenderer;
 
         // Start is called before the first frame update
-        void Start()
+        public void Start()
         {
-            currentHealth = maxHealth;
             GatherReferences();
-
-            healthController.UpdateHealth(currentHealth, maxHealth);
         }
 
         // Update is called once per frame
         void Update()
         {
-
             //healthController.UpdateHealth(currentHealth, maxHealth);
         }
 
         private void GatherReferences()
         {
+            myCharacter = gameObject.GetComponent<RpgDB.Character>();
             myAnimator = GetComponent<Animator>() as Animator;
             mySpriteRenderer = GetComponent<SpriteRenderer>() as SpriteRenderer;
+        }
+
+        public void SetHealth()
+        {
+            maxHealth = myCharacter.Hit_Points();
+            currentHealth = maxHealth;
+            healthController.UpdateHealth(currentHealth, maxHealth);
+        }
+
+        public void SetArmor(Armor armor)
+        {
+            // Set armor for KAC check
+            myCharacter.Armor = armor;
+            defense = myCharacter.KAC();
         }
 
         private void Die()
@@ -60,12 +70,29 @@ namespace AncientArmory
 
         }
 
+        public void ApplyHealing(int healingAmount)
+        {
+            currentHealth += healingAmount;
+            if (currentHealth > maxHealth)
+                currentHealth = maxHealth;
+            healthController.UpdateHealth(currentHealth, maxHealth);
+        }
+
         public void TakeDamage(int damageAmount)
         {
             currentHealth -= damageAmount;
-            currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);//keep within bounds
+            if (currentHealth <= 0)
+                Die();
+            else
+                healthController.UpdateHealth(currentHealth, maxHealth);
+        }
 
-            healthController.UpdateHealth(currentHealth, maxHealth);
+        public int Attack(MercController target)
+        {
+            bool hit = myCharacter.AttackCheck(weapon, target.defense);
+            if (hit)
+                return myCharacter.Attack(weapon, target.defense);
+            return 0;
         }
 
     }
