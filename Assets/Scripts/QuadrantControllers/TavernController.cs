@@ -104,27 +104,38 @@ namespace AncientArmory
             Character mercCharacter;
             if (Tavern.transform.childCount == 0) // if pool is empty
             {
-                // Create a new instance of MercPrefab TODO: get exact start location
-                newMerc = Instantiate(MercPrefab, Tavern.transform);
-                // Create new character mono & attach it to newMerc
-                mercCharacter = GameDatabase.Classes.CreateCharacter(newMerc, "Soldier", 1, GameDatabase.Extensions);
-                newMerc.AddComponent<MercController>();
+                mercCharacter = newInstanceMerc();
             }
             else // if pool has mercs
             {
-                // Dead mercs are pooled in the DeadPool. Grab one to use.
-                newMerc = DeadPool[0];
-                // Make the invisible dead visible
-                newMerc.SetActive(true);
-                // Move to Tavern position. TODO: get exact start location
-                newMerc.transform.parent = Tavern.transform;
-                // Get existing Character component
-                mercCharacter = newMerc.GetComponent<Character>();
+                mercCharacter = newMercFromPool();
             }
             // New merc level is equal to the number of mercs spawned
             mercCharacter.Level = ++MercsSpawned;
             assignStats(mercCharacter);
             newMerc.GetComponent<MercController>().SetHealth();
+        }
+
+        Character newMercInstance()
+        {
+            // Create a new instance of MercPrefab TODO: get exact start location
+            newMerc = Instantiate(MercPrefab, Tavern.transform);
+            // Create new character mono & attach it to newMerc
+            Character mercCharacter = GameDatabase.Classes.CreateCharacter(newMerc, "Soldier", 1, GameDatabase.Extensions);
+            newMerc.AddComponent<MercController>();
+            return mercCharacter;
+        }
+
+        Character newMercFromPool()
+        {
+            // Dead mercs are pooled in the DeadPool. Grab one to use.
+            newMerc = DeadPool[0];
+            // Make the invisible dead visible
+            newMerc.SetActive(true);
+            // Move to Tavern position. TODO: get exact start location
+            newMerc.transform.parent = Tavern.transform;
+            // Get existing Character component
+            return newMerc.GetComponent<Character>();
         }
 
         void assignStats(Character merc)
