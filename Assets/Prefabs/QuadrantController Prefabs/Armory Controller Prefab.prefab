@@ -200,8 +200,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   leaderName: Quartermaster
   timerController: {fileID: 7193830020239487793}
-  readyIcon: {fileID: 2798053426859409668, guid: 1da25bcbb867f5e4abbf5f12d8e1743e,
-    type: 3}
+  readyIcon: {fileID: 5788649632984999926}
   completeWindow: {fileID: 2950673562407671591}
   cooldownDelay: 3
   cooldownMessage: Scavenging...
@@ -578,7 +577,7 @@ PrefabInstance:
     - target: {fileID: 7396069113695894269, guid: f2931e93f493d6746b885d966a8a5922,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2433494548858761382, guid: f2931e93f493d6746b885d966a8a5922,
         type: 3}
@@ -590,8 +589,50 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: OnReadyIconPressed
       objectReference: {fileID: 0}
+    - target: {fileID: 329196246999514275, guid: f2931e93f493d6746b885d966a8a5922,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 329196246999514275, guid: f2931e93f493d6746b885d966a8a5922,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8167549099896039553, guid: f2931e93f493d6746b885d966a8a5922,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 91c81182bb4970643b2cc397df97cb40,
+        type: 3}
+    - target: {fileID: 8167549099896039553, guid: f2931e93f493d6746b885d966a8a5922,
+        type: 3}
+      propertyPath: m_Type
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8167549099896039553, guid: f2931e93f493d6746b885d966a8a5922,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8167549099896039553, guid: f2931e93f493d6746b885d966a8a5922,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8167549099896039553, guid: f2931e93f493d6746b885d966a8a5922,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f2931e93f493d6746b885d966a8a5922, type: 3}
+--- !u!1 &5788649632984999926 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7396069113695894269, guid: f2931e93f493d6746b885d966a8a5922,
+    type: 3}
+  m_PrefabInstance: {fileID: 3959076972080979211}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &5842285505716611077 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7485686479054058766, guid: f2931e93f493d6746b885d966a8a5922,

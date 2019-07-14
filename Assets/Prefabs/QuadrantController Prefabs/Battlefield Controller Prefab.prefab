@@ -200,8 +200,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   leaderName: Commander
   timerController: {fileID: 3473491613936356905}
-  readyIcon: {fileID: 1186280029895973273, guid: 29e4dbeb67a4e154e8ab6375c1fd770f,
-    type: 3}
+  readyIcon: {fileID: 3973419250757930978}
   completeWindow: {fileID: 4299922952392651712}
   cooldownDelay: 5
   cooldownMessage: 
@@ -543,7 +542,7 @@ PrefabInstance:
     - target: {fileID: 7396069113695894269, guid: f2931e93f493d6746b885d966a8a5922,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2433494548858761382, guid: f2931e93f493d6746b885d966a8a5922,
         type: 3}
@@ -555,8 +554,50 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: OnReadyIconPressed
       objectReference: {fileID: 0}
+    - target: {fileID: 329196246999514275, guid: f2931e93f493d6746b885d966a8a5922,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 329196246999514275, guid: f2931e93f493d6746b885d966a8a5922,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8167549099896039553, guid: f2931e93f493d6746b885d966a8a5922,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: dd6b8ad6e9f365543b1fffb3ae943d4a,
+        type: 3}
+    - target: {fileID: 8167549099896039553, guid: f2931e93f493d6746b885d966a8a5922,
+        type: 3}
+      propertyPath: m_Type
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8167549099896039553, guid: f2931e93f493d6746b885d966a8a5922,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8167549099896039553, guid: f2931e93f493d6746b885d966a8a5922,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8167549099896039553, guid: f2931e93f493d6746b885d966a8a5922,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f2931e93f493d6746b885d966a8a5922, type: 3}
+--- !u!1 &3973419250757930978 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7396069113695894269, guid: f2931e93f493d6746b885d966a8a5922,
+    type: 3}
+  m_PrefabInstance: {fileID: 5872824128527201567}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &3918965504836026385 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7485686479054058766, guid: f2931e93f493d6746b885d966a8a5922,
