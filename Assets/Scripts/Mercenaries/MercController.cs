@@ -94,7 +94,7 @@ namespace AncientArmory
         }
 
         // This may be used in the future
-        int resolveSingleOrDualWeildAttack(MercController attacker, int defense)
+        int resolveSingleOrDualWeildAttack(Character attacker, int defense)
         {
             int damage = 0;
             if (attacker.Right_Hand.Name != "None")
