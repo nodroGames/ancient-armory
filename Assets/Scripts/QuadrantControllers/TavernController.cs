@@ -136,18 +136,29 @@ namespace AncientArmory
 
         void InitializeMerc(Character mercCharacter)
         {
-            // New merc level is equal to the number of mercs spawned
+            MercController controller = newMerc.GetComponent<MercController>();
             mercCharacter.Level = ++MercsSpawned;
             assignStats(mercCharacter);
-            newMerc.GetComponent<MercController>().SetHealth();
+            assignCost(mercCharacter);
+            controller.SetHealth();
+        }
+
+        void assignCost(Character merc)
+        {
+            MercController controller = newMerc.GetComponent<MercController>();
+            int maxCost = merc.Abilities.STR;
+            maxCost += merc.Abilities.DEX;
+            maxCost += merc.Abilities.CON;
+            controller.cost = Roll.rollDie(maxCost);
         }
 
         void assignStats(Character merc)
         {
+            int minimum = merc.Level / 3;
             int maximum = merc.Level + 1;
-            merc.Abilities.STR = Roll.rollDie(maximum);
-            merc.Abilities.DEX = Roll.rollDie(maximum);
-            merc.Abilities.CON = Roll.rollDie(maximum);
+            merc.Abilities.STR = Roll.rollDie(maximum) + minimum;
+            merc.Abilities.DEX = Roll.rollDie(maximum) + minimum;
+            merc.Abilities.CON = Roll.rollDie(maximum) + minimum;
         }
     }
 }
