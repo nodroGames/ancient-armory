@@ -20,6 +20,7 @@ namespace AncientArmory
         GameDatabase GameDatabase;
 
         GameObject newMerc;
+        Roll Roll;
 
         protected override void Start()
         {
@@ -32,6 +33,7 @@ namespace AncientArmory
 
         void AddStaticReferences()
         {
+            Roll = new Roll();
             Armory = GameObject.FindGameObjectWithTag("ArmoryController");
             Battlefield = GameObject.FindGameObjectWithTag("BattlefieldController");
             Tavern = GameObject.FindGameObjectWithTag("TavernController");
@@ -142,9 +144,10 @@ namespace AncientArmory
 
         void assignStats(Character merc)
         {
-            merc.Abilities.STR = 10;
-            merc.Abilities.DEX = 10;
-            merc.Abilities.CON = 10;
+            int maximum = merc.Level + 1;
+            merc.Abilities.STR = Roll.rollDie(maximum);
+            merc.Abilities.DEX = Roll.rollDie(maximum);
+            merc.Abilities.CON = Roll.rollDie(maximum);
         }
     }
 }
