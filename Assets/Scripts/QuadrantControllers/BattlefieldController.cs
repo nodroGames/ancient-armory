@@ -30,7 +30,7 @@ namespace AncientArmory
 
 
         //
-        // Timer Cycle Functions
+        // UI Functions
         //
 
         public override void OnReadyIconPressed()
@@ -45,11 +45,9 @@ namespace AncientArmory
         {
             Debug.Log("Send to Ranged!", this);
 
-            GameObject merc = WaitingLine[0];
-            WaitingLine.RemoveAt(0);
-
-            SetDefenderInList(merc, BackLine, FrontLine);
+            GameObject merc = GetNextMerc();
             CheckForRangedEquipment(merc);
+            MoveToPosition(merc, "ranged");
             readyIcon.SetActive(false);
         }
 
@@ -57,26 +55,22 @@ namespace AncientArmory
         {
             Debug.Log("Send to Melee!", this);
 
-            GameObject merc = WaitingLine[0];
-            WaitingLine.RemoveAt(0);
-
-            SetDefenderInList(merc, FrontLine, BackLine);
+            GameObject merc = GetNextMerc();
             CheckForMeleeEquipment(merc);
+            MoveToPosition(merc, "melee");
             readyIcon.SetActive(false);
         }
-
-        private void OnRecruitingComplete()
-        {
-            Debug.Log("Recruiting Complete! Increment up!", this);
-            timerController.onTimerComplete.RemoveListener(OnRecruitingComplete);
-            StartCoroutine(ShowCompleteWindow()); //show message to player
-            //TimerCycle(); //or do so immediately
-        }
-
         
         // 
         // Merc Control Functions
         //
+
+        GameObject GetNextMerc()
+        {
+            GameObject merc = WaitingLine[0];
+            WaitingLine.RemoveAt(0);
+            return merc;
+        }
 
         void CheckForMeleeEquipment(GameObject merc)
         {
@@ -98,7 +92,7 @@ namespace AncientArmory
 
         void GetWeaponFromPile(String type, MercController controller)
         {
-            // walk over to pile
+            // TODO: Add movement logic
             if (type.Contains("melee"))
                 controller.weapon = MeleeWeaponsPile[0];
             else
@@ -107,7 +101,7 @@ namespace AncientArmory
 
         void GetArmorFromPile(String type, MercController controller)
         {
-            // walk over to pile
+            // TODO: Add movement logic
             for(int i = 0; i<ArmorPile.Count; i++)
             {
                 if (ArmorPile[i].Category == type)
@@ -118,6 +112,16 @@ namespace AncientArmory
             }
             controller.SetArmorAndDefense(ArmorPile[0]);
         }
+
+        void MoveToPosition(GameObject merc, String position)
+        {
+            // TODO: Add movement logic
+            if (position == "melee")
+                SetDefenderInList(merc, FrontLine, BackLine);
+            else
+                SetDefenderInList(merc, BackLine, FrontLine);
+        }
+
         void SetDefenderInList(GameObject merc, List<GameObject> desiredList, List<GameObject> alternateList)
         {
             if (desiredList.Count > 6)
