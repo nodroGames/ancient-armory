@@ -21,6 +21,7 @@ namespace AncientArmory
 
         public Weapon weapon;
         public int defense;
+        public int cost;
         Character myCharacter;
 
         [SerializeField]
