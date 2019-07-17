@@ -99,7 +99,6 @@ namespace AncientArmory
 
         void SpawnMerc()
         {
-            Character mercCharacter;
             if (DeadPool.Count == 0) // if pool is empty
             {
                 newMercInstance();
