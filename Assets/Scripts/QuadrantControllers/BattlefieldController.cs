@@ -13,6 +13,9 @@ namespace AncientArmory
         List<GameObject> FrontLine;
         List<GameObject> MiddleLine;
         List<GameObject> BackLine;
+        List<Weapon> MeleeWeaponsPile;
+        List<Weapon> RangedWeaponsPile;
+        List<Armor> ArmorPile;
         bool inCycle;
         protected override void Start()
         {
@@ -41,14 +44,24 @@ namespace AncientArmory
         public override void OnRightButton()//accept
         {
             Debug.Log("Send to Ranged!", this);
-            SetDefenderInList(WaitingLine[0], BackLine, FrontLine);
+
+            GameObject merc = WaitingLine[0];
+            WaitingLine.RemoveAt(0);
+
+            SetDefenderInList(merc, BackLine, FrontLine);
+            CheckForRangedEquipment(merc);
             readyIcon.SetActive(false);
         }
 
         public override void OnLeftButton()
         {
             Debug.Log("Send to Melee!", this);
-            SetDefenderInList(WaitingLine[0], FrontLine, BackLine);
+
+            GameObject merc = WaitingLine[0];
+            WaitingLine.RemoveAt(0);
+
+            SetDefenderInList(merc, FrontLine, BackLine);
+            CheckForMeleeEquipment(merc);
             readyIcon.SetActive(false);
         }
 
@@ -64,6 +77,47 @@ namespace AncientArmory
         // 
         // Merc Control Functions
         //
+
+        void CheckForMeleeEquipment(GameObject merc)
+        {
+            MercController controller = merc.GetComponent<MercController>();
+            if (MeleeWeaponsPile.Count > 0)
+                GetWeaponFromPile("melee", controller);
+            if (ArmorPile.Count > 0)
+                GetArmorFromPile("heavy_armor", controller);
+        }
+
+        void CheckForRangedEquipment(GameObject merc)
+        {
+            MercController controller = merc.GetComponent<MercController>();
+            if (RangedWeaponsPile.Count > 0)
+                GetWeaponFromPile("ranged", controller);
+            if (ArmorPile.Count > 0)
+                GetArmorFromPile("light_armor", controller);
+        }
+
+        void GetWeaponFromPile(String type, MercController controller)
+        {
+            // walk over to pile
+            if (type.Contains("melee"))
+                controller.weapon = MeleeWeaponsPile[0];
+            else
+                controller.weapon = RangedWeaponsPile[0];
+        }
+
+        void GetArmorFromPile(String type, MercController controller)
+        {
+            // walk over to pile
+            for(int i = 0; i<ArmorPile.Count; i++)
+            {
+                if (ArmorPile[i].Category == type)
+                {
+                    controller.SetArmorAndDefense(ArmorPile[i]);
+                    return;
+                }
+            }
+            controller.SetArmorAndDefense(ArmorPile[0]);
+        }
         void SetDefenderInList(GameObject merc, List<GameObject> desiredList, List<GameObject> alternateList)
         {
             if (desiredList.Count > 6)
