@@ -19,7 +19,7 @@ namespace AncientArmory
         [SerializeField]
         private int currentHealth = 0;
 
-        Weapon weapon;
+        public Weapon weapon;
         public int defense;
         Character myCharacter;
 
@@ -56,7 +56,7 @@ namespace AncientArmory
             healthController.UpdateHealth(currentHealth, maxHealth);
         }
 
-        public void SetArmor(Armor armor)
+        public void SetArmorAndDefense(Armor armor)
         {
             // Set armor for KAC check
             myCharacter.Armor = armor;
